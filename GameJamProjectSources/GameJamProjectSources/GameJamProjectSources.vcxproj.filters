@@ -132,6 +132,12 @@
     <Filter Include="Resource Files\engine\font\min">
       <UniqueIdentifier>{1b103960-f11a-4515-b4f1-f59333ce00d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DebugPlayer">
+      <UniqueIdentifier>{db873b09-432e-4014-831b-7516994a800d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{1a9a055d-3ae8-464d-b949-104d27b75000}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -139,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugPlayer\DebugPlayer.cpp">
+      <Filter>Source Files\DebugPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -771,6 +780,12 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPlayer\DebugPlayer.h">
+      <Filter>Source Files\DebugPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneDefine.h">
+      <Filter>Source Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
