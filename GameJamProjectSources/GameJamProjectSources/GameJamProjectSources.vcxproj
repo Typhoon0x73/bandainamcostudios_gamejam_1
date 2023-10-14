@@ -115,8 +115,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetRegister\AssetRegister.cpp" />
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Scene\Load\LoadScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -316,7 +318,10 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetRegister\AssetRegister.h" />
+    <ClInclude Include="Common\Common.h" />
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
+    <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

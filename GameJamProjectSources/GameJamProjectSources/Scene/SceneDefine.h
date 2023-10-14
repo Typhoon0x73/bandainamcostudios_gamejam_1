@@ -8,12 +8,14 @@ namespace bncup
 {
 	enum class SceneKey
 	{
-
+		Load,
 	};
 
+	class AssetRegister;
 	struct SceneData
 	{
-
+		SceneKey nextScene;
+		AssetRegister* pAssetRegister;
 	};
 
 	using GameApp = SceneManager<SceneKey, SceneData>;

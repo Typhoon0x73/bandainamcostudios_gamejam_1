@@ -138,6 +138,15 @@
     <Filter Include="Source Files\Scene">
       <UniqueIdentifier>{1a9a055d-3ae8-464d-b949-104d27b75000}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Load">
+      <UniqueIdentifier>{57399dfe-1c1c-4ba1-a714-373b2e31b659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{2f4ca481-d90a-484c-ad8e-e21372001f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AssetRegister">
+      <UniqueIdentifier>{a4e180ed-5a67-4b06-8921-9f0ce529ed1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -148,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp">
       <Filter>Source Files\DebugPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Load\LoadScene.cpp">
+      <Filter>Source Files\Scene\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetRegister\AssetRegister.cpp">
+      <Filter>Source Files\AssetRegister</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -786,6 +801,15 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneDefine.h">
       <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Load\LoadScene.h">
+      <Filter>Source Files\Scene\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetRegister\AssetRegister.h">
+      <Filter>Source Files\AssetRegister</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
