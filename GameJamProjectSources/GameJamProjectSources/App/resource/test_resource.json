@@ -1,0 +1,115 @@
+{
+	"packName": "test_resource",
+	"audioAssetDatas": [
+		{
+			"assetName": "shot",
+			"path": "example/shot.mp3",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		},
+		{
+			"assetName": "bgm",
+			"path": "example/test.mp3",
+			"loopTiming": {
+				"beginPos": 80000,
+				"endPos": 300000
+			},
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		},
+		{
+			"assetName": "piano1_C4",
+			"path": "",
+			"streaming": false,
+			"instrument": 0,
+			"key": 60,
+			"noteOn": 0.5,
+			"noteOff": 1.0,
+			"velocity": 1.0,
+			"sampleRate": 44100
+		}
+	],
+	"fontAssetDatas": [
+		{
+			"assetName": "RocknRoll",
+			"fontMethod": 0,
+			"fontSize": 16,
+			"path": "example/font/RocknRoll/RocknRollOne-Regular.ttf",
+			"faceIndex": 0,
+			"typeface": 9,
+			"style": 0
+		}
+	],
+	"textureAssetDatas": [
+		{
+			"assetName": "windmill",
+			"path": "example/windmill.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 200,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "emoji_1",
+			"path": "",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": "😀"
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "icon_1",
+			"path": "",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 1,
+				"code": 984967
+			},
+			"iconSize": 16
+		}
+	]
+}
