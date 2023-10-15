@@ -7,7 +7,7 @@ namespace
 		packInfos.clear();
 		for (const auto& file : files)
 		{
-			JSON jsonDocument{ file };
+			JSON jsonDocument = JSON::Load(file);
 			if (jsonDocument.isEmpty())
 			{
 				DEBUG_BREAK(true);
