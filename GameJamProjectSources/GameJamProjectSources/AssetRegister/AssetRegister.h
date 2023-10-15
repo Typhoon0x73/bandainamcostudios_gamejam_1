@@ -1,10 +1,10 @@
 ﻿#pragma once
-#ifndef BNCUP_ASSET_REGISTER_H_
-#define BNCUP_ASSET_REGISTER_H_
+#ifndef BNSCUP_ASSET_REGISTER_H_
+#define BNSCUP_ASSET_REGISTER_H_
 
 #include <Siv3D.hpp>
 
-namespace bncup
+namespace bnscup
 {
 	struct AssetPackInfo
 	{
@@ -41,4 +41,4 @@ namespace bncup
 	};
 }
 
-#endif // !BNCUP_ASSET_REGISTER_H_
+#endif // !BNSCUP_ASSET_REGISTER_H_

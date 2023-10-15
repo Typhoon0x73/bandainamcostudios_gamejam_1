@@ -1,10 +1,10 @@
 ﻿#pragma once
-#ifndef BNCUP_LOAD_SCENE_H_
-#define BNCUP_LOAD_SCENE_H_
+#ifndef BNSCUP_LOAD_SCENE_H_
+#define BNSCUP_LOAD_SCENE_H_
 
 #include "../SceneDefine.h"
 
-namespace bncup
+namespace bnscup
 {
 	class LoadScene : public GameApp::Scene
 	{
@@ -23,4 +23,4 @@ namespace bncup
 	};
 }
 
-#endif // !BNCUP_LOAD_SCENE_H_
+#endif // !BNSCUP_LOAD_SCENE_H_

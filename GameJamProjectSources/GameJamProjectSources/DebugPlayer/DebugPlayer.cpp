@@ -1,6 +1,6 @@
 ﻿# include "DebugPlayer.h"
 
-namespace bncup
+namespace bnscup
 {
 
 	DebugPlayer::DebugPlayer()

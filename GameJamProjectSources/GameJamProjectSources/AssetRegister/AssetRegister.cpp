@@ -2,7 +2,7 @@
 #include "../Common/Common.h"
 namespace
 {
-	bool PackLoadRegist(const Array<FilePath>& files, Array<bncup::AssetPackInfo>& packInfos)
+	bool PackLoadRegist(const Array<FilePath>& files, Array<bnscup::AssetPackInfo>& packInfos)
 	{
 		packInfos.clear();
 		for (const auto& file : files)
@@ -13,7 +13,7 @@ namespace
 				DEBUG_BREAK(true);
 				continue;
 			}
-			bncup::AssetPackInfo packInfo;
+			bnscup::AssetPackInfo packInfo;
 
 			if (jsonDocument.hasElement(U"packName"))
 			{
@@ -122,7 +122,7 @@ namespace
 	}
 }
 
-namespace bncup
+namespace bnscup
 {
 	AssetRegister::AssetRegister()
 		: m_packFiles{}

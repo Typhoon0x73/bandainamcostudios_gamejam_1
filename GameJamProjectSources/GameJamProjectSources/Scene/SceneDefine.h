@@ -1,10 +1,10 @@
 ﻿#pragma once
-#ifndef BNCUP_SCENE_DEFINE_H_
-#define BNCUP_SCENE_DEFINE_H_
+#ifndef BNSCUP_SCENE_DEFINE_H_
+#define BNSCUP_SCENE_DEFINE_H_
 
 #include <Siv3D.hpp>
 
-namespace bncup
+namespace bnscup
 {
 	enum class SceneKey
 	{
@@ -21,4 +21,4 @@ namespace bncup
 	using GameApp = SceneManager<SceneKey, SceneData>;
 }
 
-#endif // !BNCUP_SCENE_DEFINE_H_
+#endif // !BNSCUP_SCENE_DEFINE_H_

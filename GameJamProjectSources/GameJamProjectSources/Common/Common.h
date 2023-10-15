@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef BNCUP_COMMON_H_
-#define BNCUP_COMMON_H_
+#ifndef BNSCUP_COMMON_H_
+#define BNSCUP_COMMON_H_
 
 #ifdef _DEBUG
 
@@ -12,9 +12,9 @@
 
 #endif // _DEBUG
 
-namespace bncup
+namespace bnscup
 {
 
 }
 
-#endif // !BNCUP_COMMON_H_
+#endif // !BNSCUP_COMMON_H_

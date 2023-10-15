@@ -2,7 +2,7 @@
 #include "../../Common/Common.h"
 #include "../../AssetRegister/AssetRegister.h"
 
-namespace bncup
+namespace bnscup
 {
 	class LoadScene::Impl
 	{

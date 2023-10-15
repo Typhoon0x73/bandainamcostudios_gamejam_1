@@ -1,9 +1,9 @@
 ﻿#pragma once
-#ifndef BNCUP_DEBUG_PLAYER_H_
-#define BNCUP_DEBUG_PLAYER_H_
+#ifndef BNSCUP_DEBUG_PLAYER_H_
+#define BNSCUP_DEBUG_PLAYER_H_
 #include <Siv3D.hpp>
 
-namespace bncup
+namespace bnscup
 {
 	/**
 	 * @brief デバッグ用再生制御クラス
@@ -67,4 +67,4 @@ namespace bncup
 		bool  m_isStep{ false }; //!< 
 	};
 }
-#endif //!BNCUP_DEBUG_PLAYER_H_
+#endif //!BNSCUP_DEBUG_PLAYER_H_

@@ -5,7 +5,7 @@
 
 namespace
 {
-	bncup::DebugPlayer g_debugPlayer;
+	bnscup::DebugPlayer g_debugPlayer;
 }
 # endif //_DEBUG
 
@@ -15,22 +15,22 @@ namespace
 
 void Main()
 {
-	std::unique_ptr<bncup::AssetRegister> pAssetRegister;
+	std::unique_ptr<bnscup::AssetRegister> pAssetRegister;
 	{
-		pAssetRegister.reset(new bncup::AssetRegister());
+		pAssetRegister.reset(new bnscup::AssetRegister());
 	}
 
-	std::shared_ptr<bncup::SceneData> pSceneData;
+	std::shared_ptr<bnscup::SceneData> pSceneData;
 	{
-		pSceneData.reset(new bncup::SceneData());
+		pSceneData.reset(new bnscup::SceneData());
 		pSceneData->pAssetRegister = pAssetRegister.get();
-		pSceneData->nextScene = bncup::SceneKey::Load;
+		pSceneData->nextScene = bnscup::SceneKey::Load;
 	}
 
-	bncup::GameApp gameApp{ pSceneData };
+	bnscup::GameApp gameApp{ pSceneData };
 	gameApp
-		.add<bncup::LoadScene>(bncup::SceneKey::Load)
-		.init(bncup::SceneKey::Load);
+		.add<bnscup::LoadScene>(bnscup::SceneKey::Load)
+		.init(bnscup::SceneKey::Load);
 
 	while (System::Update())
 	{
