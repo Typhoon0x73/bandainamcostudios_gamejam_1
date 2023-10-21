@@ -121,7 +121,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\Exit\ExitScene.cpp" />
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
-    <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp" />
+    <ClCompile Include="Scene\StageSelect\StageSelectScene.cpp" />
+    <ClCompile Include="Scene\StageSelect\StageSelectView.cpp" />
     <ClCompile Include="Scene\Title\TitleScene.cpp" />
     <ClCompile Include="Scene\Title\TitleView.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -330,7 +331,8 @@
     <ClInclude Include="Scene\Exit\ExitScene.h" />
     <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
-    <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h" />
+    <ClInclude Include="Scene\StageSelect\StageSelectScene.h" />
+    <ClInclude Include="Scene\StageSelect\StageSelectView.h" />
     <ClInclude Include="Scene\Title\TitleScene.h" />
     <ClInclude Include="Scene\Title\TitleView.h" />
     <ClInclude Include="stdafx.h" />

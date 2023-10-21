@@ -17,7 +17,7 @@ namespace bnscup
 			{
 				SceneKey::StageSelect,
 				{
-					U"",
+					U"resource/stageselect_top.json",
 				}
 			},
 			{

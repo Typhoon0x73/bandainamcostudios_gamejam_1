@@ -179,9 +179,6 @@
     <ClCompile Include="Scene\Title\TitleScene.cpp">
       <Filter>Source Files\Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp">
-      <Filter>Source Files\Scene\StageSelect</Filter>
-    </ClCompile>
     <ClCompile Include="Button\Button.cpp">
       <Filter>Source Files\Button</Filter>
     </ClCompile>
@@ -190,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="Scene\Exit\ExitScene.cpp">
       <Filter>Source Files\Scene\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StageSelect\StageSelectView.cpp">
+      <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StageSelect\StageSelectScene.cpp">
+      <Filter>Source Files\Scene\StageSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -841,9 +844,6 @@
     <ClInclude Include="Scene\Title\TitleScene.h">
       <Filter>Source Files\Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h">
-      <Filter>Source Files\Scene\StageSelect</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\Title\TitleView.h">
       <Filter>Source Files\Scene\Title</Filter>
     </ClInclude>
@@ -852,6 +852,12 @@
     </ClInclude>
     <ClInclude Include="Scene\Exit\ExitScene.h">
       <Filter>Source Files\Scene\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StageSelect\StageSelectView.h">
+      <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StageSelect\StageSelectScene.h">
+      <Filter>Source Files\Scene\StageSelect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

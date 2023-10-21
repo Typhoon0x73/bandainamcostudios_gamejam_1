@@ -1,0 +1,36 @@
+{
+	"packName": "stageselect_top",
+	"fontAssetDatas": [
+		{
+			"assetName": "font_play_button",
+			"fontMethod": 2,
+			"fontSize": 48,
+			"path": "",
+			"faceIndex": 0,
+			"typeface": 10,
+			"style": 0
+		}
+	],
+	"textureAssetDatas": [
+		{
+			"assetName": "icon_return_mark",
+			"path": "",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 1,
+				"code": 989108
+			},
+			"iconSize": 32
+		}
+	]
+}

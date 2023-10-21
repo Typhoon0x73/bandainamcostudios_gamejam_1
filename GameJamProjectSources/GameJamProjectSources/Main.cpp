@@ -13,7 +13,7 @@ namespace
 # include "Scene/SceneDefine.h"
 # include "Scene/Load/LoadScene.h"
 # include "Scene/Title/TitleScene.h"
-# include "Scene/StageSelectScene/StageSelectScene.h"
+# include "Scene/StageSelect/StageSelectScene.h"
 # include "Scene/Exit/ExitScene.h"
 # include "AssetRegister/AssetRegister.h"
 
