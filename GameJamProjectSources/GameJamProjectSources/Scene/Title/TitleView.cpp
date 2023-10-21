@@ -1,4 +1,5 @@
 ﻿#include "TitleView.h"
+#include "../../Common/Common.h"
 #include "../../Button/Button.h"
 
 namespace
@@ -61,7 +62,7 @@ namespace bnscup
 
 		// ロゴ
 		{
-			const auto& logoText = m_logoFont(U"きゅうじょたい");
+			const auto& logoText = m_logoFont(bnscup::GAME_TITLE);
 			const auto& region = logoText.region();
 			const double topMargin = 50.0;
 			logoText.drawAt(Scene::CenterF().x, region.centerY() + topMargin);
