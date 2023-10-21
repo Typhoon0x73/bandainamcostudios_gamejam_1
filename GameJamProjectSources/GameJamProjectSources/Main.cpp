@@ -31,7 +31,7 @@ void Main()
 	// ウィンドウの設定
 	{
 		Window::Resize(bnscup::WINDOW_SIZE_W, bnscup::WINDOW_SIZE_H);
-		Window::SetTitle(U"ゲームタイトル（仮）");
+		Window::SetTitle(U"きゅうじょたい");
 	}
 
 	{

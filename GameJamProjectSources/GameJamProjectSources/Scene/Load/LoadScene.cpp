@@ -11,7 +11,7 @@ namespace bnscup
 			{
 				SceneKey::Title,
 				{
-					U"",
+					U"resource/title_top.json",
 				}
 			},
 			{

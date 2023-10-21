@@ -123,6 +123,7 @@
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
     <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp" />
     <ClCompile Include="Scene\Title\TitleScene.cpp" />
+    <ClCompile Include="Scene\Title\TitleView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -331,6 +332,7 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Scene\Title\TitleScene.h" />
+    <ClInclude Include="Scene\Title\TitleView.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

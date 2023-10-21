@@ -1,0 +1,23 @@
+{
+	"packName": "title_top",
+	"fontAssetDatas": [
+		{
+			"assetName": "font_title_button",
+			"fontMethod": 2,
+			"fontSize": 48,
+			"path": "",
+			"faceIndex": 0,
+			"typeface": 10,
+			"style": 0
+		},
+		{
+			"assetName": "font_title_logo",
+			"fontMethod": 2,
+			"fontSize": 86,
+			"path": "resource/fonts/memoir-square.otf",
+			"faceIndex": 0,
+			"typeface": 9,
+			"style": 0
+		}
+	]
+}

@@ -1,4 +1,5 @@
 ﻿#include "TitleScene.h"
+#include "TitleView.h"
 
 namespace bnscup
 {
@@ -26,6 +27,8 @@ namespace bnscup
 		Step m_step;
 		SceneKey m_nextSceneKey;
 		bool m_isEnd;
+
+		TitleView m_titleView;
 	};
 
 	//==================================================
@@ -34,6 +37,7 @@ namespace bnscup
 		: m_step{ Step::CreateDisp }
 		, m_nextSceneKey{ SceneKey::Title }
 		, m_isEnd{ false }
+		, m_titleView{}
 	{
 	}
 
@@ -43,10 +47,28 @@ namespace bnscup
 
 	void TitleScene::Impl::update()
 	{
+		m_titleView.update();
+
+		// ステージ選択画面へ
+		if (m_titleView.isStageSelectButtonSelected())
+		{
+			m_nextSceneKey = SceneKey::StageSelect;
+			m_isEnd = true;
+			return;
+		}
+
+		// ゲーム終了
+		if (m_titleView.isExitButtonSelected())
+		{
+			m_nextSceneKey = SceneKey::Exit;
+			m_isEnd = true;
+			return;
+		}
 	}
 
 	void TitleScene::Impl::draw() const
 	{
+		m_titleView.draw();
 	}
 
 	SceneKey TitleScene::Impl::getNextScene() const

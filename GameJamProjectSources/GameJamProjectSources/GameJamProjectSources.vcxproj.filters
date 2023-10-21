@@ -185,6 +185,9 @@
     <ClCompile Include="Button\Button.cpp">
       <Filter>Source Files\Button</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Title\TitleView.cpp">
+      <Filter>Source Files\Scene\Title</Filter>
+    </ClCompile>
     <ClCompile Include="Scene\Exit\ExitScene.cpp">
       <Filter>Source Files\Scene\Exit</Filter>
     </ClCompile>
@@ -840,6 +843,9 @@
     </ClInclude>
     <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h">
       <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\TitleView.h">
+      <Filter>Source Files\Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="Button\Button.h">
       <Filter>Source Files\Button</Filter>
