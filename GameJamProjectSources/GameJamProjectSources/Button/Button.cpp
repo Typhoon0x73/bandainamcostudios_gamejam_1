@@ -6,11 +6,13 @@ namespace bnscup
 	{
 		constexpr const char32_t* SOUND_OK = U"sd_button_ok";
 		constexpr const char32_t* SOUND_CANCEL = U"sd_button_cancel";
+		constexpr const char32_t* SOUND_SELECT = U"sd_button_select";
 
 		static const HashTable<Button::Sounds, AssetName> SOUND_TABLE =
 		{
 			{ Button::Sounds::OK, SOUND_OK },
 			{ Button::Sounds::Cancel, SOUND_CANCEL },
+			{ Button::Sounds::Select, SOUND_SELECT },
 		};
 	}
 
@@ -18,6 +20,7 @@ namespace bnscup
 		: m_rect{ rect }
 		, m_isHold{ false }
 		, m_isSelected{ false }
+		, m_isEnable{ true }
 	{
 	}
 
@@ -43,6 +46,11 @@ namespace bnscup
 		}
 	}
 
+	void Button::setEnable(bool enable)
+	{
+		m_isEnable = enable;
+	}
+
 	bool Button::isHold() const
 	{
 		return m_isHold;
@@ -56,6 +64,11 @@ namespace bnscup
 		}
 		AudioAsset(SOUND_TABLE.at(sd)).playOneShot();
 		return true;
+	}
+
+	bool Button::isEnable() const
+	{
+		return m_isEnable;
 	}
 
 	RectF& Button::getRect()

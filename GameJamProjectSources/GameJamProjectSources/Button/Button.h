@@ -14,6 +14,7 @@ namespace bnscup
 		{
 			OK,
 			Cancel,
+			Select,
 		};
 
 	public:
@@ -23,9 +24,13 @@ namespace bnscup
 
 		void update();
 
+		void setEnable(bool enable);
+
 		bool isHold() const;
 
 		bool isSelected(Sounds sd) const;
+
+		bool isEnable() const;
 
 		RectF& getRect();
 		const RectF& getRect() const;
@@ -35,6 +40,7 @@ namespace bnscup
 		RectF m_rect;
 		bool m_isHold;
 		bool m_isSelected;
+		bool m_isEnable;
 	};
 }
 

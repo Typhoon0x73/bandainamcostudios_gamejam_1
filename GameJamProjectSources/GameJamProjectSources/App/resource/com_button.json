@@ -14,7 +14,18 @@
 		},
 		{
 			"assetName": "sd_button_cancel",
-			"path": "resource/sounds/se/button/cursor_style_5.wav",
+			"path": "resource/sounds/se/button/back_style_2_001.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		},
+		{
+			"assetName": "sd_button_select",
+			"path": "resource/sounds/se/button/cursor_style_4.wav",
 			"streaming": false,
 			"instrument": 0,
 			"key": 0,
