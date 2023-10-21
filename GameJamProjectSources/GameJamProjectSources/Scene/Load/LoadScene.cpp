@@ -4,6 +4,19 @@
 
 namespace bnscup
 {
+	namespace
+	{
+		static const HashTable<SceneKey, const Array<FilePath>> TABLE =
+		{
+			{
+				SceneKey::Title,
+				{
+					U"",
+				}
+			},
+		};
+	}
+
 	class LoadScene::Impl
 	{
 		enum class Step
@@ -17,7 +30,7 @@ namespace bnscup
 
 	public:
 
-		Impl(AssetRegister* pAssetRegister);
+		Impl(AssetRegister* pAssetRegister, SceneKey nextScene);
 		~Impl();
 
 		void update();
@@ -29,13 +42,15 @@ namespace bnscup
 
 		Step m_step;
 		AssetRegister* m_pAssetRegister;
+		SceneKey m_nextScene;
 	};
 
 	//==================================================
 
-	LoadScene::Impl::Impl(AssetRegister* pAssetRegister)
+	LoadScene::Impl::Impl(AssetRegister* pAssetRegister, SceneKey nextScene)
 		: m_step{ Step::RegistAsync }
 		, m_pAssetRegister{ pAssetRegister }
+		, m_nextScene{ nextScene }
 	{
 	}
 
@@ -56,12 +71,23 @@ namespace bnscup
 		{
 		case Step::RegistAsync:
 		{
+			// 先に登録済みを破棄
+			m_pAssetRegister->unregist();
+			m_pAssetRegister->reset();
+
+			// テーブルからパックを登録
+			const auto& assets = TABLE.at(m_nextScene);
+			for (const auto& asset : assets)
+			{
+				m_pAssetRegister->addRegistPackFile(asset);
+			}
 			m_pAssetRegister->asyncRegist();
 			m_step = Step::RegistWait;
 			[[fallthrough]];
 		}
 		case Step::RegistWait:
 		{
+			// 各パックを読み込むまで待機
 			if (not(m_pAssetRegister->isReady()))
 			{
 				return;
@@ -71,6 +97,7 @@ namespace bnscup
 		}
 		case Step::LoadAsync:
 		{
+			// 各アセットごとに読み込み
 			for (const auto& packInfo : m_pAssetRegister->getPackInfos())
 			{
 				for (const auto& assetName : packInfo.audioAssetNames)
@@ -91,6 +118,7 @@ namespace bnscup
 		}
 		case Step::LoadWait:
 		{
+			// 各アセット読み込み待ち
 			for (const auto& packInfo : m_pAssetRegister->getPackInfos())
 			{
 				for (const auto& assetName : packInfo.audioAssetNames)
@@ -121,6 +149,7 @@ namespace bnscup
 		case Step::End:
 			return;
 		default:
+			// ここには来ないはず
 			DEBUG_BREAK(true);
 			return;
 		}
@@ -128,6 +157,7 @@ namespace bnscup
 
 	void LoadScene::Impl::draw() const
 	{
+		// 黒背景
 		RectF{ 0, 0, Scene::Width(), Scene::Height() }.draw(Palette::Black);
 	}
 
@@ -142,7 +172,7 @@ namespace bnscup
 		: super{ init }
 		, m_pImpl{ nullptr }
 	{
-		m_pImpl.reset(new Impl(getData().pAssetRegister));
+		m_pImpl.reset(new Impl(getData().pAssetRegister, getData().nextScene));
 	}
 
 	LoadScene::~LoadScene()

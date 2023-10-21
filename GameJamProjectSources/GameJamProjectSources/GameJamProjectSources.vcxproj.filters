@@ -147,6 +147,9 @@
     <Filter Include="Source Files\AssetRegister">
       <UniqueIdentifier>{a4e180ed-5a67-4b06-8921-9f0ce529ed1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Title">
+      <UniqueIdentifier>{a6b7844d-0e26-440c-ba14-360d5a78f694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="AssetRegister\AssetRegister.cpp">
       <Filter>Source Files\AssetRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Title\TitleScene.cpp">
+      <Filter>Source Files\Scene\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -810,6 +816,9 @@
     </ClInclude>
     <ClInclude Include="AssetRegister\AssetRegister.h">
       <Filter>Source Files\AssetRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\TitleScene.h">
+      <Filter>Source Files\Scene\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

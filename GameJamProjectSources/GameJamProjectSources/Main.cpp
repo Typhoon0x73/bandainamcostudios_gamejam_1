@@ -11,31 +11,70 @@ namespace
 
 # include "Scene/SceneDefine.h"
 # include "Scene/Load/LoadScene.h"
+# include "Scene/Title/TitleScene.h"
 # include "AssetRegister/AssetRegister.h"
+
+namespace
+{
+	static const Array<FilePath> COMMON =
+	{
+		U"resource/test_resource.json",
+	};
+	bnscup::AssetRegister g_commonRegister;
+}
 
 void Main()
 {
+	{
+		// コモンデータを登録、読み込み
+		for (const auto& asset : COMMON)
+		{
+			g_commonRegister.addRegistPackFile(asset);
+		}
+		g_commonRegister.asyncRegist();
+		while (not(g_commonRegister.isReady())) {};
+		for (const auto& pack : g_commonRegister.getPackInfos())
+		{
+			for (const auto& info : pack.audioAssetNames)
+			{
+				AudioAsset::Load(info);
+			}
+			for (const auto& info : pack.fontAssetNames)
+			{
+				FontAsset::Load(info);
+			}
+			for (const auto& info : pack.textureAssetNames)
+			{
+				TextureAsset::Load(info);
+			}
+		}
+	}
+
+	// シーン用アセット登録インスタンス
 	std::unique_ptr<bnscup::AssetRegister> pAssetRegister;
 	{
 		pAssetRegister.reset(new bnscup::AssetRegister());
 	}
 
+	// シーン共通データ
 	std::shared_ptr<bnscup::SceneData> pSceneData;
 	{
 		pSceneData.reset(new bnscup::SceneData());
 		pSceneData->pAssetRegister = pAssetRegister.get();
-		pSceneData->nextScene = bnscup::SceneKey::Load;
+		pSceneData->nextScene = bnscup::SceneKey::Title;
 	}
 
+	// ゲームシーンの登録
 	bnscup::GameApp gameApp{ pSceneData };
 	gameApp
 		.add<bnscup::LoadScene>(bnscup::SceneKey::Load)
+		.add<bnscup::TitleScene>(bnscup::SceneKey::Title)
 		.init(bnscup::SceneKey::Load);
 
 	while (System::Update())
 	{
 #ifdef _DEBUG
-
+		// デバッグ用再生制御
 		g_debugPlayer.refresh();
 
 		if (not(g_debugPlayer.isPause()))

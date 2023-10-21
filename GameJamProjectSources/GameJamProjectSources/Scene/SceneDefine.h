@@ -9,6 +9,7 @@ namespace bnscup
 	enum class SceneKey
 	{
 		Load,
+		Title,
 	};
 
 	class AssetRegister;
