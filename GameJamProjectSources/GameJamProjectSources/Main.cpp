@@ -12,6 +12,7 @@ namespace
 # include "Scene/SceneDefine.h"
 # include "Scene/Load/LoadScene.h"
 # include "Scene/Title/TitleScene.h"
+# include "Scene/StageSelectScene/StageSelectScene.h"
 # include "AssetRegister/AssetRegister.h"
 
 namespace
@@ -69,6 +70,7 @@ void Main()
 	gameApp
 		.add<bnscup::LoadScene>(bnscup::SceneKey::Load)
 		.add<bnscup::TitleScene>(bnscup::SceneKey::Title)
+		.add<bnscup::StageSelectScene>(bnscup::SceneKey::StageSelect)
 		.init(bnscup::SceneKey::Load);
 
 	while (System::Update())

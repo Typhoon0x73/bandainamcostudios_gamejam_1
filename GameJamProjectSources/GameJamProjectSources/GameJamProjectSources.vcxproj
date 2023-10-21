@@ -119,6 +119,7 @@
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
+    <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp" />
     <ClCompile Include="Scene\Title\TitleScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -324,6 +325,7 @@
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
     <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
+    <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Scene\Title\TitleScene.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

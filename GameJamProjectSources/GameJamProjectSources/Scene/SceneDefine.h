@@ -10,6 +10,7 @@ namespace bnscup
 	{
 		Load,
 		Title,
+		StageSelect,
 	};
 
 	class AssetRegister;

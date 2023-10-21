@@ -14,6 +14,12 @@ namespace bnscup
 					U"",
 				}
 			},
+			{
+				SceneKey::StageSelect,
+				{
+					U"",
+				}
+			},
 		};
 	}
 
