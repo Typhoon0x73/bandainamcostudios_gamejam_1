@@ -21,6 +21,12 @@ namespace bnscup
 				}
 			},
 			{
+				SceneKey::Game,
+				{
+					U"resource/game_top.json",
+				}
+			},
+			{
 				SceneKey::Exit,
 				Array<FilePath>()
 			},
