@@ -11,6 +11,7 @@ namespace bnscup
 		Load,
 		Title,
 		StageSelect,
+		Game,
 
 		Exit,
 	};

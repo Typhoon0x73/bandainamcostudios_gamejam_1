@@ -159,6 +159,9 @@
     <Filter Include="Source Files\Scene\Exit">
       <UniqueIdentifier>{e8badb2b-4646-4826-a33b-60d7aec67037}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Game">
+      <UniqueIdentifier>{d2a2d1c8-8dab-4f50-8dbe-465b91432956}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Scene\StageSelect\StageSelectScene.cpp">
       <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Game\GameScene.cpp">
+      <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -858,6 +864,9 @@
     </ClInclude>
     <ClInclude Include="Scene\StageSelect\StageSelectScene.h">
       <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Game\GameScene.h">
+      <Filter>Source Files\Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -120,6 +120,7 @@
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\Exit\ExitScene.cpp" />
+    <ClCompile Include="Scene\Game\GameScene.cpp" />
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
     <ClCompile Include="Scene\StageSelect\StageSelectScene.cpp" />
     <ClCompile Include="Scene\StageSelect\StageSelectView.cpp" />
@@ -329,6 +330,7 @@
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
     <ClInclude Include="Scene\Exit\ExitScene.h" />
+    <ClInclude Include="Scene\Game\GameScene.h" />
     <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\StageSelect\StageSelectScene.h" />
