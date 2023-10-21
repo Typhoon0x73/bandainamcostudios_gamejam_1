@@ -20,6 +20,10 @@ namespace bnscup
 					U"",
 				}
 			},
+			{
+				SceneKey::Exit,
+				Array<FilePath>()
+			},
 		};
 	}
 

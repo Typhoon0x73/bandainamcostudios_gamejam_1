@@ -14,6 +14,7 @@ namespace
 # include "Scene/Load/LoadScene.h"
 # include "Scene/Title/TitleScene.h"
 # include "Scene/StageSelectScene/StageSelectScene.h"
+# include "Scene/Exit/ExitScene.h"
 # include "AssetRegister/AssetRegister.h"
 
 namespace
@@ -78,6 +79,7 @@ void Main()
 		.add<bnscup::LoadScene>(bnscup::SceneKey::Load)
 		.add<bnscup::TitleScene>(bnscup::SceneKey::Title)
 		.add<bnscup::StageSelectScene>(bnscup::SceneKey::StageSelect)
+		.add<bnscup::ExitScene>(bnscup::SceneKey::Exit)
 		.init(bnscup::SceneKey::Load);
 
 	while (System::Update())

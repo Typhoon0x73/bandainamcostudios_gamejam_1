@@ -119,6 +119,7 @@
     <ClCompile Include="Button\Button.cpp" />
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Scene\Exit\ExitScene.cpp" />
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
     <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp" />
     <ClCompile Include="Scene\Title\TitleScene.cpp" />
@@ -325,6 +326,7 @@
     <ClInclude Include="Button\Button.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
+    <ClInclude Include="Scene\Exit\ExitScene.h" />
     <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h" />

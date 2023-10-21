@@ -11,6 +11,8 @@ namespace bnscup
 		Load,
 		Title,
 		StageSelect,
+
+		Exit,
 	};
 
 	class AssetRegister;

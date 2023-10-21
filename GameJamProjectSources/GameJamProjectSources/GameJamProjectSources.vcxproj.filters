@@ -156,6 +156,9 @@
     <Filter Include="Source Files\Button">
       <UniqueIdentifier>{430d200a-4647-49da-a971-e5520d6582c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Exit">
+      <UniqueIdentifier>{e8badb2b-4646-4826-a33b-60d7aec67037}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Button\Button.cpp">
       <Filter>Source Files\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Exit\ExitScene.cpp">
+      <Filter>Source Files\Scene\Exit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -837,6 +843,9 @@
     </ClInclude>
     <ClInclude Include="Button\Button.h">
       <Filter>Source Files\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Exit\ExitScene.h">
+      <Filter>Source Files\Scene\Exit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
