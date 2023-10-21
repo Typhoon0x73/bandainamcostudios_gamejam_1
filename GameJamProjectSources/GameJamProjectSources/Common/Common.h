@@ -14,7 +14,8 @@
 
 namespace bnscup
 {
-
+	constexpr unsigned long WINDOW_SIZE_W = 1280;
+	constexpr unsigned long WINDOW_SIZE_H =  960;
 }
 
 #endif // !BNSCUP_COMMON_H_

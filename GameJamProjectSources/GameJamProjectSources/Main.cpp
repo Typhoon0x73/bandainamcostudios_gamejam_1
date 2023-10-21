@@ -1,4 +1,5 @@
 ﻿# include <Siv3D.hpp> // Siv3D v0.6.12
+# include "Common/Common.h"
 
 # ifdef _DEBUG
 # include "DebugPlayer/DebugPlayer.h"
@@ -26,6 +27,12 @@ namespace
 
 void Main()
 {
+	// ウィンドウの設定
+	{
+		Window::Resize(bnscup::WINDOW_SIZE_W, bnscup::WINDOW_SIZE_H);
+		Window::SetTitle(U"ゲームタイトル（仮）");
+	}
+
 	{
 		// コモンデータを登録、読み込み
 		for (const auto& asset : COMMON)
