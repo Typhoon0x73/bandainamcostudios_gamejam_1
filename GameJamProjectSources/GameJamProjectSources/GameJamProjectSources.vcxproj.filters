@@ -153,6 +153,9 @@
     <Filter Include="Source Files\Scene\StageSelect">
       <UniqueIdentifier>{e461b88f-4af6-4dc8-9e13-4cf998b0c302}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Button">
+      <UniqueIdentifier>{430d200a-4647-49da-a971-e5520d6582c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="Scene\StageSelectScene\StageSelectScene.cpp">
       <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Button\Button.cpp">
+      <Filter>Source Files\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -828,6 +834,9 @@
     </ClInclude>
     <ClInclude Include="Scene\StageSelectScene\StageSelectScene.h">
       <Filter>Source Files\Scene\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Button\Button.h">
+      <Filter>Source Files\Button</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

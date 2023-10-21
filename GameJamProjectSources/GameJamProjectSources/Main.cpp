@@ -19,7 +19,7 @@ namespace
 {
 	static const Array<FilePath> COMMON =
 	{
-		U"resource/test_resource.json",
+		U"resource/com_button.json",
 	};
 	bnscup::AssetRegister g_commonRegister;
 }
