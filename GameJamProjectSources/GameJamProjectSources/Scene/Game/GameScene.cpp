@@ -12,6 +12,16 @@ namespace bnscup
 	};
 
 	//==================================================
+	
+	GameScene::Impl::Impl()
+	{
+	}
+
+	GameScene::Impl::~Impl()
+	{
+	}
+	
+	//==================================================
 
 	GameScene::GameScene(const super::InitData& init)
 		: super{ init }
