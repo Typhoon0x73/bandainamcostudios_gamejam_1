@@ -14,11 +14,13 @@ namespace bnscup
 		void update();
 		void draw() const;
 
+		int32 getStageNo() const;
 		SceneKey getNextScene() const;
 		bool isEnd() const;
 
 	private:
 
+		int32 m_stageNo;
 		SceneKey m_nextScene;
 		bool m_isEnd;
 
@@ -31,6 +33,7 @@ namespace bnscup
 		: m_nextScene{ SceneKey::StageSelect }
 		, m_isEnd{ false }
 		, m_stageSelectView{}
+		, m_stageNo{ -1 }
 	{
 	}
 
@@ -46,6 +49,7 @@ namespace bnscup
 		if (m_stageSelectView.isPlayButtonSelected())
 		{
 			m_nextScene = SceneKey::Game;
+			m_stageNo = 0;
 			m_isEnd = true;
 			return;
 		}
@@ -61,6 +65,11 @@ namespace bnscup
 	void StageSelectScene::Impl::draw() const
 	{
 		m_stageSelectView.draw();
+	}
+
+	int32 StageSelectScene::Impl::getStageNo() const
+	{
+		return m_stageNo;
 	}
 
 	SceneKey StageSelectScene::Impl::getNextScene() const
@@ -94,6 +103,7 @@ namespace bnscup
 			if (m_pImpl->isEnd())
 			{
 				auto& sceneData = getData();
+				sceneData.stageNo = m_pImpl->getStageNo();
 				sceneData.nextScene = m_pImpl->getNextScene();
 				changeScene(SceneKey::Load, 1.0s);
 			}

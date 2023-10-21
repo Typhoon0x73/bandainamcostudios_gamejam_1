@@ -1,6 +1,7 @@
 ﻿#include "LoadScene.h"
 #include "../../Common/Common.h"
 #include "../../AssetRegister/AssetRegister.h"
+#include "../Game/Map/MapData.h"
 
 namespace bnscup
 {
@@ -46,7 +47,7 @@ namespace bnscup
 
 	public:
 
-		Impl(AssetRegister* pAssetRegister, SceneKey nextScene);
+		Impl(const LoadScene::Data_t* pSceneData);
 		~Impl();
 
 		void update();
@@ -57,16 +58,14 @@ namespace bnscup
 	private:
 
 		Step m_step;
-		AssetRegister* m_pAssetRegister;
-		SceneKey m_nextScene;
+		const LoadScene::Data_t* m_pSceneData;
 	};
 
 	//==================================================
 
-	LoadScene::Impl::Impl(AssetRegister* pAssetRegister, SceneKey nextScene)
+	LoadScene::Impl::Impl(const LoadScene::Data_t* pSceneData)
 		: m_step{ Step::RegistAsync }
-		, m_pAssetRegister{ pAssetRegister }
-		, m_nextScene{ nextScene }
+		, m_pSceneData{ pSceneData }
 	{
 	}
 
@@ -76,7 +75,9 @@ namespace bnscup
 
 	void LoadScene::Impl::update()
 	{
-		if (m_pAssetRegister == nullptr)
+		if (m_pSceneData == nullptr
+			or m_pSceneData->pMapData == nullptr
+			or m_pSceneData->pAssetRegister == nullptr)
 		{
 			DEBUG_BREAK(true);
 			m_step = Step::End;
@@ -88,23 +89,33 @@ namespace bnscup
 		case Step::RegistAsync:
 		{
 			// 先に登録済みを破棄
-			m_pAssetRegister->unregist();
-			m_pAssetRegister->reset();
+			m_pSceneData->pAssetRegister->unregist();
+			m_pSceneData->pAssetRegister->reset();
 
 			// テーブルからパックを登録
-			const auto& assets = TABLE.at(m_nextScene);
+			const auto& assets = TABLE.at(m_pSceneData->nextScene);
 			for (const auto& asset : assets)
 			{
-				m_pAssetRegister->addRegistPackFile(asset);
+				m_pSceneData->pAssetRegister->addRegistPackFile(asset);
 			}
-			m_pAssetRegister->asyncRegist();
+			m_pSceneData->pAssetRegister->asyncRegist();
+			if (m_pSceneData->stageNo >= 0)
+			{
+				m_pSceneData->pMapData->loadAsync(U"resource/map_{:0>2}.csv"_fmt(m_pSceneData->stageNo));
+			}
 			m_step = Step::RegistWait;
 			[[fallthrough]];
 		}
 		case Step::RegistWait:
 		{
 			// 各パックを読み込むまで待機
-			if (not(m_pAssetRegister->isReady()))
+			if (not(m_pSceneData->pAssetRegister->isReady()))
+			{
+				return;
+			}
+			// マップの読み込み
+			if (m_pSceneData->stageNo >= 0
+				and not(m_pSceneData->pMapData->isReady()))
 			{
 				return;
 			}
@@ -114,7 +125,7 @@ namespace bnscup
 		case Step::LoadAsync:
 		{
 			// 各アセットごとに読み込み
-			for (const auto& packInfo : m_pAssetRegister->getPackInfos())
+			for (const auto& packInfo : m_pSceneData->pAssetRegister->getPackInfos())
 			{
 				for (const auto& assetName : packInfo.audioAssetNames)
 				{
@@ -135,7 +146,7 @@ namespace bnscup
 		case Step::LoadWait:
 		{
 			// 各アセット読み込み待ち
-			for (const auto& packInfo : m_pAssetRegister->getPackInfos())
+			for (const auto& packInfo : m_pSceneData->pAssetRegister->getPackInfos())
 			{
 				for (const auto& assetName : packInfo.audioAssetNames)
 				{
@@ -188,7 +199,7 @@ namespace bnscup
 		: super{ init }
 		, m_pImpl{ nullptr }
 	{
-		m_pImpl.reset(new Impl(getData().pAssetRegister, getData().nextScene));
+		m_pImpl.reset(new Impl(&(getData())));
 	}
 
 	LoadScene::~LoadScene()

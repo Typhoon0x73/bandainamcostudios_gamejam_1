@@ -162,6 +162,9 @@
     <Filter Include="Source Files\Scene\Game">
       <UniqueIdentifier>{d2a2d1c8-8dab-4f50-8dbe-465b91432956}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Game\Map">
+      <UniqueIdentifier>{7e33f37e-a732-45a7-8367-25e448f25bdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Scene\Game\GameScene.cpp">
       <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Game\Map\MapData.cpp">
+      <Filter>Source Files\Scene\Game\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -867,6 +873,9 @@
     </ClInclude>
     <ClInclude Include="Scene\Game\GameScene.h">
       <Filter>Source Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Game\Map\MapData.h">
+      <Filter>Source Files\Scene\Game\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

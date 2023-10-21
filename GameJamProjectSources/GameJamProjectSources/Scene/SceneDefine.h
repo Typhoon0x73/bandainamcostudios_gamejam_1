@@ -17,10 +17,13 @@ namespace bnscup
 	};
 
 	class AssetRegister;
+	class MapData;
 	struct SceneData
 	{
+		int32 stageNo;
 		SceneKey nextScene;
 		AssetRegister* pAssetRegister;
+		MapData* pMapData;
 	};
 
 	using GameApp = SceneManager<SceneKey, SceneData>;

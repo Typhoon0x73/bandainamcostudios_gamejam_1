@@ -17,6 +17,7 @@ namespace
 # include "Scene/Game/GameScene.h"
 # include "Scene/Exit/ExitScene.h"
 # include "AssetRegister/AssetRegister.h"
+# include "Scene/Game/Map/MapData.h"
 
 namespace
 {
@@ -65,12 +66,19 @@ void Main()
 	{
 		pAssetRegister.reset(new bnscup::AssetRegister());
 	}
+	// マップインスタンス
+	std::unique_ptr<bnscup::MapData> pMapData;
+	{
+		pMapData.reset(new bnscup::MapData());
+	}
 
 	// シーン共通データ
 	std::shared_ptr<bnscup::SceneData> pSceneData;
 	{
 		pSceneData.reset(new bnscup::SceneData());
+		pSceneData->stageNo = -1;
 		pSceneData->pAssetRegister = pAssetRegister.get();
+		pSceneData->pMapData = pMapData.get();
 		pSceneData->nextScene = bnscup::SceneKey::Title;
 	}
 
