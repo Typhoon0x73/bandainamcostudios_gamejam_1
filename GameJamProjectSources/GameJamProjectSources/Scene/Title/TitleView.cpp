@@ -92,7 +92,9 @@ namespace bnscup
 		// 各フォントの設定
 		{
 			m_logoFont = FontAsset(U"font_title_logo");
+			DEBUG_BREAK(m_logoFont.isEmpty());
 			m_buttonFont = FontAsset(U"font_title_button");
+			DEBUG_BREAK(m_buttonFont.isEmpty());
 		}
 
 		// ステージ選択ボタンの作成
