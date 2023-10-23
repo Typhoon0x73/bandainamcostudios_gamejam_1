@@ -66,11 +66,6 @@ void Main()
 	{
 		pAssetRegister.reset(new bnscup::AssetRegister());
 	}
-	// マップインスタンス
-	std::unique_ptr<bnscup::MapData> pMapData;
-	{
-		pMapData.reset(new bnscup::MapData());
-	}
 
 	// シーン共通データ
 	std::shared_ptr<bnscup::SceneData> pSceneData;
@@ -78,7 +73,6 @@ void Main()
 		pSceneData.reset(new bnscup::SceneData());
 		pSceneData->stageNo = -1;
 		pSceneData->pAssetRegister = pAssetRegister.get();
-		pSceneData->pMapData = pMapData.get();
 		pSceneData->nextScene = bnscup::SceneKey::Title;
 	}
 

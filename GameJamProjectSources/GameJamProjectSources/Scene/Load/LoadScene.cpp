@@ -76,7 +76,6 @@ namespace bnscup
 	void LoadScene::Impl::update()
 	{
 		if (m_pSceneData == nullptr
-			or m_pSceneData->pMapData == nullptr
 			or m_pSceneData->pAssetRegister == nullptr)
 		{
 			DEBUG_BREAK(true);
@@ -99,10 +98,6 @@ namespace bnscup
 				m_pSceneData->pAssetRegister->addRegistPackFile(asset);
 			}
 			m_pSceneData->pAssetRegister->asyncRegist();
-			if (m_pSceneData->stageNo >= 0)
-			{
-				m_pSceneData->pMapData->loadAsync(U"resource/map_{:0>2}.csv"_fmt(m_pSceneData->stageNo));
-			}
 			m_step = Step::RegistWait;
 			[[fallthrough]];
 		}
@@ -110,12 +105,6 @@ namespace bnscup
 		{
 			// 各パックを読み込むまで待機
 			if (not(m_pSceneData->pAssetRegister->isReady()))
-			{
-				return;
-			}
-			// マップの読み込み
-			if (m_pSceneData->stageNo >= 0
-				and not(m_pSceneData->pMapData->isReady()))
 			{
 				return;
 			}

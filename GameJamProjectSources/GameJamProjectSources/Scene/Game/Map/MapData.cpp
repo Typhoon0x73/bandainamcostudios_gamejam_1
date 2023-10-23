@@ -1,54 +1,15 @@
 ﻿#include "MapData.h"
 #include "../../../Common/Common.h"
-
-namespace
-{
-	bool LoadMapData(FilePath path, std::array<Grid<int32>, bnscup::MapData::LAYER_MAX>& out)
-	{
-		CSV csv;
-		if (not(csv.load(path)))
-		{
-			DEBUG_BREAK(true);
-			return false;
-		}
-		const auto& row0 = csv.getRow(0);
-		const uint32 rowCount = ParseOr<uint32>(row0[0], 0);
-		const uint32 columnCount = ParseOr<uint32>(row0[1], 0);
-
-		for (auto& grid : out)
-		{
-			grid.resize(columnCount, rowCount);
-		}
-
-		for (uint32 layer : step(bnscup::MapData::LAYER_MAX))
-		{
-			auto& outGrid = out[layer];
-			for (uint32 row = 0; row < rowCount; row++)
-			{
-				for (uint32 column : step(columnCount))
-				{
-					const auto& rowData = csv.getRow(row + 1 + layer * rowCount);
-					if (rowData.size() <= column)
-					{
-						DEBUG_BREAK(true);
-						return false;
-					}
-					const auto& cell = rowData[column];
-					const int32 cellData = ParseOr<int32>(cell, 0);
-					outGrid[Point(column, row)] = cellData;
-				}
-			}
-		}
-		return true;
-	}
-}
+#include "RoomData.h"
 
 namespace bnscup
 {
 
-	MapData::MapData()
-		: m_asyncTask{ none }
-		, m_layers{}
+	MapData::MapData(const Array<RoomData>& rooms, AssetNameView name, int32 mapSizeW, int32 mapSizeH, int32 chipSize)
+		: m_tilesetTexture{ name }
+		, m_rooms{ rooms }
+		, m_mapSize{ mapSizeW, mapSizeH }
+		, m_chipSize{ chipSize }
 	{
 	}
 
@@ -56,42 +17,29 @@ namespace bnscup
 	{
 	}
 
-	void MapData::loadAsync(FilePath path)
+	void MapData::setTilesetTextureName(AssetNameView name)
 	{
-		m_asyncTask.emplace(Async(LoadMapData, path, std::ref(m_layers)));
+		m_tilesetTexture = name;
 	}
 
-	bool MapData::isReady() const
+	AssetNameView MapData::getTilesetTextureName() const
 	{
-		if (not(m_asyncTask.has_value()))
-		{
-			return false;
-		}
-		return m_asyncTask->isReady();
+		return m_tilesetTexture;
 	}
 
-	const std::array<Grid<int32>, MapData::LAYER_MAX>& MapData::getLayers() const
+	const Array<RoomData>& MapData::getRooms() const
 	{
-		return m_layers;
+		return m_rooms;
 	}
 
-	const Grid<int32>& MapData::getGrid(Layer layer) const
+	const Size& MapData::getMapSize() const
 	{
-		uint32 index = FromEnum(layer);
-		DEBUG_BREAK(LAYER_MAX <= index);
-		return m_layers[index];
+		return m_mapSize;
 	}
 
-	int32 MapData::getCell(Layer layer, uint32 x, uint32 y) const
+	int32 MapData::getChipSize() const
 	{
-		const auto& grid = getGrid(layer);
-		if (x >= grid.width() or y >= grid.height())
-		{
-			DEBUG_BREAK(true);
-			return -1;
-		}
-		return grid.at(y, x);
+		return m_chipSize;
 	}
-
 
 }

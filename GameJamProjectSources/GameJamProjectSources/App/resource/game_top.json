@@ -1,3 +1,25 @@
 {
-	"packName": "game_top"
+	"packName": "game_top",
+	"textureAssetDatas": [
+		{
+			"assetName": "dungeon_tileset",
+			"path": "resource/textures/Dungeon_Tileset.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		}
+	]
 }

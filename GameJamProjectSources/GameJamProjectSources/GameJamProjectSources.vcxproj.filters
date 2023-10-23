@@ -206,6 +206,12 @@
     <ClCompile Include="Scene\Game\Map\MapData.cpp">
       <Filter>Source Files\Scene\Game\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Game\Map\MapView.cpp">
+      <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Game\Map\RoomData.cpp">
+      <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -875,6 +881,12 @@
       <Filter>Source Files\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Game\Map\MapData.h">
+      <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Game\Map\MapView.h">
+      <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Game\Map\RoomData.h">
       <Filter>Source Files\Scene\Game\Map</Filter>
     </ClInclude>
   </ItemGroup>

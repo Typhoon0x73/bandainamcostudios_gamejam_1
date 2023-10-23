@@ -6,32 +6,27 @@
 
 namespace bnscup
 {
+	class RoomData;
 	class MapData
 	{
 	public:
 
-		enum class Layer : uint32
-		{
-			Grounds = 0,
-			Wall,
-			Ornament,
-		};
-		static const uint32 LAYER_MAX = 3;
-
-		explicit MapData();
+		explicit MapData(const Array<RoomData>& rooms, AssetNameView name, int32 mapSizeW, int32 mapSizeH, int32 chipSize);
 		virtual ~MapData();
 
-		void loadAsync(FilePath path);
-		bool isReady() const;
+		void setTilesetTextureName(AssetNameView name);
+		AssetNameView getTilesetTextureName() const;
 
-		const std::array<Grid<int32>, LAYER_MAX>& getLayers() const;
-		const Grid<int32>& getGrid(Layer layer) const;
-		int32 getCell(Layer layer, uint32 x, uint32 y) const;
+		const Array<RoomData>& getRooms() const;
+		const Size& getMapSize() const;
+		int32 getChipSize() const;
 
 	private:
 
-		Optional<AsyncTask<bool>> m_asyncTask;
-		std::array<Grid<int32>, LAYER_MAX> m_layers;
+		AssetName m_tilesetTexture;
+		Array<RoomData> m_rooms;
+		Size m_mapSize;
+		int32 m_chipSize;
 	};
 }
 
