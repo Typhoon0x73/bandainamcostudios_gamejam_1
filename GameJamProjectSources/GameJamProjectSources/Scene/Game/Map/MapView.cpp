@@ -41,11 +41,15 @@ namespace bnscup
 		const auto& rooms = m_pMapData->getRooms();
 		const auto& mapSize = m_pMapData->getMapSize();
 		const auto& chipSize = m_pMapData->getChipSize();
+
+		RectF noneSrcRect{ 8 * chipSize, 7 * chipSize, chipSize, chipSize };
+		m_tileSet(noneSrcRect).fitted(Scene::Size() * 2).draw(-Scene::Size());
+
 		for (int32 y : step(mapSize.y))
 		{
 			for (int32 x : step(mapSize.x))
 			{
-				const int32 roomIndex = x * mapSize.x + y;
+				const int32 roomIndex = x + y * mapSize.x;
 				const auto& room = rooms[roomIndex];
 				if (room.isEmpty())
 				{
@@ -60,6 +64,68 @@ namespace bnscup
 						RectF srcRect{ chip.x * chipSize, chip.y * chipSize, chipSize, chipSize };
 						m_tileSet(srcRect).draw((x * 5 + rx) * chipSize, (y * 5 + ry) * chipSize);
 					}
+				}
+				// 通路の表示
+				if (room.canPassable(RoomData::Route::Up))
+				{
+					RectF srcRect0{ 9 * chipSize, 7 * chipSize, chipSize, chipSize };
+					RectF srcRect1{ 7 * chipSize, 0 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect0).draw((x * 5 + 2) * chipSize, (y * 5 + 0) * chipSize);
+					m_tileSet(srcRect1).draw((x * 5 + 2) * chipSize, (y * 5 + 1) * chipSize);
+				}
+				if (room.canPassable(RoomData::Route::Down))
+				{
+					RectF srcRect0{ 9 * chipSize, 7 * chipSize, chipSize, chipSize };
+					RectF srcRect1{ 7 * chipSize, 2 * chipSize, chipSize, chipSize };
+					RectF srcRect2{ 5 * chipSize, 5 * chipSize, chipSize, chipSize };
+					RectF srcRect3{ 4 * chipSize, 5 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect0).draw((x * 5 + 2) * chipSize, (y * 5 + 4) * chipSize);
+					m_tileSet(srcRect1).draw((x * 5 + 2) * chipSize, (y * 5 + 3) * chipSize);
+					m_tileSet(srcRect2).draw((x * 5 + 1) * chipSize, (y * 5 + 4) * chipSize);
+					m_tileSet(srcRect3).draw((x * 5 + 3) * chipSize, (y * 5 + 4) * chipSize);
+				}
+				if (room.canPassable(RoomData::Route::Left))
+				{
+					RectF srcRect0{ 9 * chipSize, 7 * chipSize, chipSize, chipSize };
+					RectF srcRect1{ 6 * chipSize, 1 * chipSize, chipSize, chipSize };
+					RectF srcRect2{ 1 * chipSize, 0 * chipSize, chipSize, chipSize };
+					RectF srcRect3{ 3 * chipSize, 5 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect0).draw((x * 5 + 0) * chipSize, (y * 5 + 2) * chipSize);
+					m_tileSet(srcRect1).draw((x * 5 + 1) * chipSize, (y * 5 + 2) * chipSize);
+					m_tileSet(srcRect2).draw((x * 5 + 0) * chipSize, (y * 5 + 1) * chipSize);
+					m_tileSet(srcRect3).draw((x * 5 + 0) * chipSize, (y * 5 + 3) * chipSize);
+				}
+				if (room.canPassable(RoomData::Route::Right))
+				{
+					RectF srcRect0{ 9 * chipSize, 7 * chipSize, chipSize, chipSize };
+					RectF srcRect1{ 8 * chipSize, 1 * chipSize, chipSize, chipSize };
+					RectF srcRect2{ 4 * chipSize, 0 * chipSize, chipSize, chipSize };
+					RectF srcRect3{ 0 * chipSize, 5 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect0).draw((x * 5 + 4) * chipSize, (y * 5 + 2) * chipSize);
+					m_tileSet(srcRect1).draw((x * 5 + 3) * chipSize, (y * 5 + 2) * chipSize);
+					m_tileSet(srcRect2).draw((x * 5 + 4) * chipSize, (y * 5 + 1) * chipSize);
+					m_tileSet(srcRect3).draw((x * 5 + 4) * chipSize, (y * 5 + 3) * chipSize);
+				}
+				// 扉の表示
+				if (room.isLocked(RoomData::Route::Up))
+				{
+					RectF srcRect{ 7 * chipSize, 3 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect).draw((x * 5 + 2) * chipSize, (y * 5 + 0) * chipSize);
+				}
+				if (room.isLocked(RoomData::Route::Down))
+				{
+					RectF srcRect{ 7 * chipSize, 3 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect).draw((x * 5 + 2) * chipSize, (y * 5 + 4) * chipSize);
+				}
+				if (room.isLocked(RoomData::Route::Left))
+				{
+					RectF srcRect{ 7 * chipSize, 4 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect).draw((x * 5 + 0) * chipSize, (y * 5 + 2) * chipSize);
+				}
+				if (room.isLocked(RoomData::Route::Right))
+				{
+					RectF srcRect{ 8 * chipSize, 5 * chipSize, chipSize, chipSize };
+					m_tileSet(srcRect).draw((x * 5 + 4) * chipSize, (y * 5 + 2) * chipSize);
 				}
 			}
 		}
