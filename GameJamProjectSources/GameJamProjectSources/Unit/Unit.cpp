@@ -3,11 +3,15 @@
 namespace bnscup
 {
 	Unit::Unit()
-		: m_animTimer{ 0.0 }
+		: m_moveTimer{ 0.0 }
+		, m_animTimer{ 0.0 }
 		, m_animRectNo{ 0 }
 		, m_texture{}
 		, m_animRects{}
 		, m_pos{}
+		, m_targetPos{}
+		, m_prevPos{}
+		, m_isMirror{ false }
 	{
 	}
 
@@ -25,17 +29,34 @@ namespace bnscup
 				m_animRectNo = 0;
 			}
 		}
+
+		if (m_targetPos != m_pos) {
+			m_moveTimer += Scene::DeltaTime();
+			m_pos = Math::Lerp(m_prevPos, m_targetPos, m_moveTimer);
+			if (m_moveTimer >= 1.0) {
+				m_pos = m_targetPos;
+				m_moveTimer = 0.0;
+			}
+		}
 	}
 
 	void Unit::draw() const
 	{
 		const RectF& srcRect = m_animRects[m_animRectNo].second;
-		m_texture(srcRect).draw(m_pos - Vec2{ srcRect.w * 0.5, srcRect.h });
+		m_texture(srcRect).mirrored(m_isMirror).draw(m_pos - Vec2{srcRect.w * 0.5, srcRect.h});
+	}
+
+	void Unit::setTargetPos(const Vec2& targetPos)
+	{
+		m_targetPos = targetPos;
+		m_prevPos = m_pos;
+		m_moveTimer = 0.0;
 	}
 
 	void Unit::setPos(const Vec2& pos)
 	{
 		m_pos = pos;
+		m_targetPos = pos;
 	}
 
 	const Vec2& Unit::getPos() const
@@ -51,6 +72,16 @@ namespace bnscup
 	void Unit::setAnimRect(const Array<std::pair<Duration, RectF>>& animRects)
 	{
 		m_animRects = animRects;
+	}
+
+	bool Unit::isMoving() const
+	{
+		return (m_targetPos != m_pos);
+	}
+
+	void Unit::setMirror(bool isMirror)
+	{
+		m_isMirror = isMirror;
 	}
 
 }
