@@ -118,6 +118,7 @@
     <ClCompile Include="AssetRegister\AssetRegister.cpp" />
     <ClCompile Include="Button\Button.cpp" />
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
+    <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\Exit\ExitScene.cpp" />
     <ClCompile Include="Scene\Game\GameScene.cpp" />
@@ -333,6 +334,7 @@
     <ClInclude Include="Button\Button.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
+    <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Scene\Exit\ExitScene.h" />
     <ClInclude Include="Scene\Game\GameScene.h" />
     <ClInclude Include="Scene\Game\Map\MapData.h" />

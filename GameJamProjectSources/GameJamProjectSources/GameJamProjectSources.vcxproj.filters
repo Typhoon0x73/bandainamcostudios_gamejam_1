@@ -168,6 +168,9 @@
     <Filter Include="Source Files\Unit">
       <UniqueIdentifier>{35027ed8-38f1-4b53-8453-e0f030169d6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{df4ccf92-152b-4f92-bb04-a4b1ef975488}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="Scene\Game\Map\RoomData.cpp">
       <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Item.cpp">
+      <Filter>Source Files\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -897,6 +903,9 @@
     </ClInclude>
     <ClInclude Include="Scene\Game\Map\RoomData.h">
       <Filter>Source Files\Scene\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Item.h">
+      <Filter>Source Files\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
