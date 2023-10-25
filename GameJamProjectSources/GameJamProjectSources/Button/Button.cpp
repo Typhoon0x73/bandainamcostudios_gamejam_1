@@ -17,7 +17,19 @@ namespace bnscup
 	}
 
 	Button::Button(const RectF& rect)
-		: m_rect{ rect }
+		: m_collisionType{ CollisionType::Rect }
+		, m_rect{ rect }
+		, m_circle{ 0, 0, 0 }
+		, m_isHold{ false }
+		, m_isSelected{ false }
+		, m_isEnable{ true }
+	{
+	}
+
+	Button::Button(const Circle& circle)
+		: m_collisionType{ CollisionType::Circle }
+		, m_rect{ RectF::Empty() }
+		, m_circle{ circle }
 		, m_isHold{ false }
 		, m_isSelected{ false }
 		, m_isEnable{ true }
@@ -30,19 +42,33 @@ namespace bnscup
 
 	void Button::update()
 	{
+		if (not(m_isEnable))
+		{
+			m_isHold = false;
+			m_isSelected = false;
+			return;
+		}
+
 		m_isSelected = false;
 		if (MouseL.up())
 		{
-			if (m_isHold and m_rect.mouseOver())
+			if (m_isHold)
 			{
-				m_isSelected = true;
+				bool isRectSelected = (m_collisionType == CollisionType::Rect) and m_rect.mouseOver();
+				bool isCircleSelected = (m_collisionType == CollisionType::Circle) and m_circle.mouseOver();
+				if (isRectSelected or isCircleSelected) {
+					m_isSelected = true;
+				}
 			}
 			m_isHold = false;
 		}
 
 		if (not(m_isHold))
 		{
-			m_isHold = m_rect.leftClicked();
+			bool isRectHold = (m_collisionType == CollisionType::Rect) and m_rect.leftClicked();
+			bool isCircleHold = (m_collisionType == CollisionType::Circle) and m_circle.leftClicked();
+
+			m_isHold = (isRectHold or isCircleHold);
 		}
 	}
 
@@ -80,6 +106,17 @@ namespace bnscup
 	{
 		return m_rect;
 	}
+
+	Circle& Button::getCircle()
+	{
+		return m_circle;
+	}
+
+	const Circle& Button::getCircle() const
+	{
+		return m_circle;
+	}
+
 }
 
 

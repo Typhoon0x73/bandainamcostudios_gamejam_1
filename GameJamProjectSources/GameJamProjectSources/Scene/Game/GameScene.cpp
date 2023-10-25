@@ -4,6 +4,7 @@
 #include "Map/MapView.h"
 #include "Map/RoomData.h"
 #include "../../Unit/Unit.h"
+#include "../../Button/Button.h"
 
 namespace
 {
@@ -28,6 +29,26 @@ namespace
 	static const Circle CIRCLE_CONTROLLER_AREA =
 	{
 		1160, 840, 100
+	};
+
+	static const Circle CIRCLE_CONTROLLER_UP_AREA =
+	{
+		1160, 770, 40
+	};
+
+	static const Circle CIRCLE_CONTROLLER_DOWN_AREA =
+	{
+		1160, 900, 40
+	};
+
+	static const Circle CIRCLE_CONTROLLER_LEFT_AREA =
+	{
+		1090, 840, 40
+	};
+
+	static const Circle CIRCLE_CONTROLLER_RIGHT_AREA =
+	{
+		1230, 840, 40
 	};
 
 	// 描画された最大のアルファ成分を保持するブレンドステートを作成する
@@ -79,6 +100,12 @@ namespace bnscup
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
 
+		Texture m_controllerTexture;
+		Button m_upControl;
+		Button m_downControl;
+		Button m_leftControl;
+		Button m_rightControl;
+
 	};
 
 	//==================================================
@@ -93,6 +120,11 @@ namespace bnscup
 			, static_cast<uint32>(ROUNDRECT_MAPVIEW_AREA.rect.size.y) }
 		, m_pPlayerUnit{ nullptr }
 		, m_units{}
+		, m_controllerTexture{}
+		, m_upControl{ CIRCLE_CONTROLLER_UP_AREA }
+		, m_downControl{ CIRCLE_CONTROLLER_DOWN_AREA }
+		, m_leftControl{ CIRCLE_CONTROLLER_LEFT_AREA }
+		, m_rightControl{ CIRCLE_CONTROLLER_RIGHT_AREA }
 	{
 		// あとでステージ生成クラスとかにまとめたい
 		if (stageNo == 0)
@@ -148,6 +180,8 @@ namespace bnscup
 			auto* pMapView = new MapView(m_pMapData.get());
 			m_pMapView.reset(pMapView);
 		}
+
+		m_controllerTexture = TextureAsset(U"controller_switch");
 	}
 
 	GameScene::Impl::~Impl()
@@ -171,7 +205,24 @@ namespace bnscup
 		ROUNDRECT_STAGENO_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
 		ROUNDRECT_MAPVIEW_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
 		ROUNDRECT_LOG_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
-		CIRCLE_CONTROLLER_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
+
+		// コントローラーの表示
+		{
+			CIRCLE_CONTROLLER_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
+
+			const ScopedRenderStates2D samplerState{ SamplerState::ClampNearest };
+			const int32 chipSize = 16;
+			const int32 xCount = static_cast<int32>(m_controllerTexture.width() / chipSize);
+			RectF srcRect{ 0, 0, chipSize, chipSize };
+			srcRect.setPos(656 % xCount * chipSize, 656 / xCount * chipSize);
+			m_controllerTexture(srcRect).scaled(5).drawAt(m_upControl.getCircle().center);
+			srcRect.setPos(726 % xCount * chipSize, 726 / xCount * chipSize);
+			m_controllerTexture(srcRect).scaled(5).drawAt(m_downControl.getCircle().center);
+			srcRect.setPos(761 % xCount * chipSize, 761 / xCount * chipSize);
+			m_controllerTexture(srcRect).scaled(5).drawAt(m_leftControl.getCircle().center);
+			srcRect.setPos(691 % xCount * chipSize, 691 / xCount * chipSize);
+			m_controllerTexture(srcRect).scaled(5).drawAt(m_rightControl.getCircle().center);
+		}
 		{
 			const ScopedRenderTarget2D target{ m_renderTarget.clear(Palette::Black) };
 			const ScopedRenderStates2D blend{ SamplerState::ClampNearest, MakeBlendState() };
@@ -211,6 +262,19 @@ namespace bnscup
 			{
 				unit->update();
 			}
+		}
+
+		m_upControl.update();
+		if (m_upControl.isSelected(Button::Sounds::Select)) {
+		}
+		m_downControl.update();
+		if (m_downControl.isSelected(Button::Sounds::Select)) {
+		}
+		m_leftControl.update();
+		if (m_leftControl.isSelected(Button::Sounds::Select)) {
+		}
+		m_rightControl.update();
+		if (m_rightControl.isSelected(Button::Sounds::Select)) {
 		}
 	}
 

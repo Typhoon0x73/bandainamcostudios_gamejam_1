@@ -17,9 +17,18 @@ namespace bnscup
 			Select,
 		};
 
+	private:
+
+		enum class CollisionType
+		{
+			Rect,
+			Circle,
+		};
+
 	public:
 
 		explicit Button(const RectF& rect);
+		explicit Button(const Circle& circle);
 		virtual ~Button();
 
 		void update();
@@ -35,9 +44,14 @@ namespace bnscup
 		RectF& getRect();
 		const RectF& getRect() const;
 
+		Circle& getCircle();
+		const Circle& getCircle() const;
+
 	private:
 
+		CollisionType m_collisionType;
 		RectF m_rect;
+		Circle m_circle;
 		bool m_isHold;
 		bool m_isSelected;
 		bool m_isEnable;

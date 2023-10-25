@@ -34,5 +34,27 @@
 			"velocity": 0.0,
 			"sampleRate": 44100
 		}
+	],
+	"textureAssetDatas": [
+		{
+			"assetName": "controller_switch",
+			"path": "resource/textures/gdb-switch-2.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		}
 	]
 }
