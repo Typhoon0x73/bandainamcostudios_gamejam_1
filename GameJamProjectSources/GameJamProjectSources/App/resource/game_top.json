@@ -1,5 +1,29 @@
 {
 	"packName": "game_top",
+	"audioAssetDatas": [
+		{
+			"assetName": "sd_collect_item",
+			"path": "resource/sounds/se/game/confirm_style_4_003.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		},
+		{
+			"assetName": "sd_unlock_door",
+			"path": "resource/sounds/se/game/465610__nox_sound__vehicle_car_peugeot_106_door_open_mono.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		}
+	],
 	"textureAssetDatas": [
 		{
 			"assetName": "dungeon_tileset",

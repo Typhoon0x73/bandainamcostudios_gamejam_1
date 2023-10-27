@@ -118,14 +118,15 @@ namespace bnscup
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
 
+		Array<Item*> m_holdKeys;
 		Array<std::unique_ptr<Item>> m_items;
 
 		Texture m_controllerTexture;
-		Button m_upControl;
-		Button m_downControl;
-		Button m_leftControl;
-		Button m_rightControl;
+		Button m_controlButtons[4];
 
+
+		Audio m_collectItemSE;
+		Audio m_unlockDoorSE;
 	};
 
 	//==================================================
@@ -142,10 +143,13 @@ namespace bnscup
 		, m_units{}
 		, m_items{}
 		, m_controllerTexture{}
-		, m_upControl{ CIRCLE_CONTROLLER_UP_AREA }
-		, m_downControl{ CIRCLE_CONTROLLER_DOWN_AREA }
-		, m_leftControl{ CIRCLE_CONTROLLER_LEFT_AREA }
-		, m_rightControl{ CIRCLE_CONTROLLER_RIGHT_AREA }
+		, m_controlButtons{
+			Button(CIRCLE_CONTROLLER_UP_AREA)
+			, Button(CIRCLE_CONTROLLER_DOWN_AREA)
+			, Button(CIRCLE_CONTROLLER_LEFT_AREA)
+			, Button(CIRCLE_CONTROLLER_RIGHT_AREA) }
+		, m_collectItemSE{}
+		, m_unlockDoorSE{}
 	{
 		// あとでステージ生成クラスとかにまとめたい
 		if (stageNo == 0)
@@ -203,7 +207,7 @@ namespace bnscup
 			// アイテムの生成
 			{
 				const Point testKeyPos{ 1, 1 };
-				auto* pItem = new Item();
+				auto* pItem = new Item(Item::Type::GoldKey);
 				pItem->setPos(MapPosToGlobalPos(testKeyPos));
 				pItem->setSrcRect(RectF{ 9 * chipSize, 9 * chipSize, chipSize, chipSize });
 				pItem->setTexture(U"dungeon_tileset");
@@ -227,6 +231,8 @@ namespace bnscup
 		}
 
 		m_controllerTexture = TextureAsset(U"controller_switch");
+		m_collectItemSE = AudioAsset(U"sd_collect_item");
+		m_unlockDoorSE = AudioAsset(U"sd_unlock_door");
 	}
 
 	GameScene::Impl::~Impl()
@@ -259,14 +265,14 @@ namespace bnscup
 			const int32 chipSize = 16;
 			const int32 xCount = static_cast<int32>(m_controllerTexture.width() / chipSize);
 			RectF srcRect{ 0, 0, chipSize, chipSize };
-			srcRect.setPos(656 % xCount * chipSize, 656 / xCount * chipSize);
-			m_controllerTexture(srcRect).scaled(5).drawAt(m_upControl.getCircle().center);
-			srcRect.setPos(726 % xCount * chipSize, 726 / xCount * chipSize);
-			m_controllerTexture(srcRect).scaled(5).drawAt(m_downControl.getCircle().center);
-			srcRect.setPos(761 % xCount * chipSize, 761 / xCount * chipSize);
-			m_controllerTexture(srcRect).scaled(5).drawAt(m_leftControl.getCircle().center);
-			srcRect.setPos(691 % xCount * chipSize, 691 / xCount * chipSize);
-			m_controllerTexture(srcRect).scaled(5).drawAt(m_rightControl.getCircle().center);
+			static const int32 CONTROLLER_CHIP_TABLE[] = { 656, 726, 761, 691 };
+			for (size_t i : step(std::size(m_controlButtons)))
+			{
+				const int32 chipNo = CONTROLLER_CHIP_TABLE[i];
+				srcRect.setPos(chipNo % xCount * chipSize, chipNo / xCount * chipSize);
+				const auto& centerPos = m_controlButtons[i].getCircle().center;
+				m_controllerTexture(srcRect).scaled(5).drawAt(centerPos);
+			}
 		}
 		{
 			const ScopedRenderTarget2D target{ m_renderTarget.clear(Palette::Black) };
@@ -281,6 +287,10 @@ namespace bnscup
 			{
 				if (item)
 				{
+					if (item->existOwer())
+					{
+						continue;
+					}
 					item->draw();
 				}
 			}
@@ -317,108 +327,108 @@ namespace bnscup
 			}
 		}
 
-		m_upControl.update();
-		if (m_upControl.isSelected(Button::Sounds::Select)) {
-			Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
-			const auto& nowRoom = m_pMapData->getRoomData(mapPos);
-			if (nowRoom.canPassable(RoomData::Route::Up)) {
-				if (nowRoom.isLocked(RoomData::Route::Up)) {
-					// 鍵がかかっている
+		for (auto& button : m_controlButtons)
+		{
+			button.update();
+		}
+
+		if (m_pPlayerUnit)
+		{
+			for (auto& item : m_items)
+			{
+				if (item->existOwer())
+				{
+					continue;
 				}
-				else {
-					mapPos.y -= 1;
-					const auto& upRoom = m_pMapData->getRoomData(mapPos);
-					if (upRoom.canPassable(RoomData::Route::Down)) {
-						if (upRoom.isLocked(RoomData::Route::Down)) {
+
+				// 鍵との判定
+				if (item->isKey())
+				{
+					const auto& itemPos = MapPosFromGlobalPos(item->getPos());
+					const auto& playerPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
+					if (itemPos == playerPos)
+					{
+						item->setOwner(m_pPlayerUnit);
+						m_holdKeys.emplace_back(item.get());
+						m_collectItemSE.playOneShot();
+					}
+				}
+			}
+		}
+
+		// 入れ子パラダイス
+		// 後で別にまとめる
+		// 通れるか、鍵を使用するかの確認
+		{
+			static const std::pair<RoomData::Route, RoomData::Route> ROUTE_TABLE[] = {
+				{ RoomData::Route::Up, RoomData::Route::Down },
+				{ RoomData::Route::Down, RoomData::Route::Up },
+				{ RoomData::Route::Left, RoomData::Route::Right },
+				{ RoomData::Route::Right, RoomData::Route::Left }
+			};
+			for (size_t i : step(std::size(m_controlButtons)))
+			{
+				if (m_controlButtons[i].isSelected(Button::Sounds::Select))
+				{
+					Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
+					const auto& nowRoom = m_pMapData->getRoomData(mapPos);
+					const auto& route = ROUTE_TABLE[i];
+					if (route.first == RoomData::Route::Left)
+					{
+						m_pPlayerUnit->setMirror(true);
+					}
+					else if (route.first == RoomData::Route::Right)
+					{
+						m_pPlayerUnit->setMirror(false);
+					}
+					if (nowRoom.canPassable(route.first))
+					{
+						if (nowRoom.isLocked(route.first))
+						{
 							// 鍵がかかっている
 						}
-						else {
-							// 通れる
-							m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
-							m_step = Step::Move;
-							return;
+						else
+						{
+							// 移動先
+							switch (route.first)
+							{
+							case bnscup::RoomData::Route::Up:
+								mapPos.y -= 1;
+								break;
+							case bnscup::RoomData::Route::Right:
+								mapPos.x += 1;
+								break;
+							case bnscup::RoomData::Route::Down:
+								mapPos.y += 1;
+								break;
+							case bnscup::RoomData::Route::Left:
+								mapPos.x -= 1;
+								break;
+							default:
+								DEBUG_BREAK(true);
+								break;
+							}
+							const auto& targetRoom = m_pMapData->getRoomData(mapPos);
+							if (targetRoom.canPassable(route.second))
+							{
+								if (targetRoom.isLocked(route.second))
+								{
+									// 鍵がかかっている
+								}
+								else
+								{
+									// 通れる
+									m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
+									m_step = Step::Move;
+									return;
+								}
+							}
 						}
 					}
 				}
 			}
 		}
-		m_downControl.update();
-		if (m_downControl.isSelected(Button::Sounds::Select)) {
-			Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
-			const auto& nowRoom = m_pMapData->getRoomData(mapPos);
-			if (nowRoom.canPassable(RoomData::Route::Down)) {
-				if (nowRoom.isLocked(RoomData::Route::Down)) {
-					// 鍵がかかっている
-				}
-				else {
-					mapPos.y += 1;
-					const auto& upRoom = m_pMapData->getRoomData(mapPos);
-					if (upRoom.canPassable(RoomData::Route::Up)) {
-						if (upRoom.isLocked(RoomData::Route::Up)) {
-							// 鍵がかかっている
-						}
-						else {
-							// 通れる
-							m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
-							m_step = Step::Move;
-							return;
-						}
-					}
-				}
-			}
-		}
-		m_leftControl.update();
-		if (m_leftControl.isSelected(Button::Sounds::Select)) {
-			m_pPlayerUnit->setMirror(true);
-			Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
-			const auto& nowRoom = m_pMapData->getRoomData(mapPos);
-			if (nowRoom.canPassable(RoomData::Route::Left)) {
-				if (nowRoom.isLocked(RoomData::Route::Left)) {
-					// 鍵がかかっている
-				}
-				else {
-					mapPos.x -= 1;
-					const auto& upRoom = m_pMapData->getRoomData(mapPos);
-					if (upRoom.canPassable(RoomData::Route::Right)) {
-						if (upRoom.isLocked(RoomData::Route::Right)) {
-							// 鍵がかかっている
-						}
-						else {
-							// 通れる
-							m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
-							m_step = Step::Move;
-							return;
-						}
-					}
-				}
-			}
-		}
-		m_rightControl.update();
-		if (m_rightControl.isSelected(Button::Sounds::Select)) {
-			m_pPlayerUnit->setMirror(false);
-			Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
-			const auto& nowRoom = m_pMapData->getRoomData(mapPos);
-			if (nowRoom.canPassable(RoomData::Route::Right)) {
-				if (nowRoom.isLocked(RoomData::Route::Right)) {
-					// 鍵がかかっている
-				}
-				else {
-					mapPos.x += 1;
-					const auto& upRoom = m_pMapData->getRoomData(mapPos);
-					if (upRoom.canPassable(RoomData::Route::Left)) {
-						if (upRoom.isLocked(RoomData::Route::Left)) {
-							// 鍵がかかっている
-						}
-						else {
-							// 通れる
-							m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
-							m_step = Step::Move;
-							return;
-						}
-					}
-				}
-			}
-		}
+		
 	}
 
 	void GameScene::Impl::stepMove()
