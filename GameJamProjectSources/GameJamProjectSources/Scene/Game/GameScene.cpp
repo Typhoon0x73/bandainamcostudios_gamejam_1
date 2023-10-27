@@ -4,6 +4,7 @@
 #include "Map/MapView.h"
 #include "Map/RoomData.h"
 #include "../../Unit/Unit.h"
+#include "../../Item/Item.h"
 #include "../../Button/Button.h"
 
 namespace
@@ -117,6 +118,8 @@ namespace bnscup
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
 
+		Array<std::unique_ptr<Item>> m_items;
+
 		Texture m_controllerTexture;
 		Button m_upControl;
 		Button m_downControl;
@@ -137,6 +140,7 @@ namespace bnscup
 			, static_cast<uint32>(ROUNDRECT_MAPVIEW_AREA.rect.size.y) }
 		, m_pPlayerUnit{ nullptr }
 		, m_units{}
+		, m_items{}
 		, m_controllerTexture{}
 		, m_upControl{ CIRCLE_CONTROLLER_UP_AREA }
 		, m_downControl{ CIRCLE_CONTROLLER_DOWN_AREA }
@@ -179,6 +183,31 @@ namespace bnscup
 				);
 				m_pPlayerUnit = pPlayerUnit;
 				m_units.emplace_back(pPlayerUnit);
+			}
+			// 救助対象ユニット
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 0, 0 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 256, 16, 32 } },
+						{ 0.175s, RectF{ 144, 256, 16, 32 } },
+						{ 0.175s, RectF{ 160, 256, 16, 32 } },
+						{ 0.175s, RectF{ 176, 256, 16, 32 } },
+					}
+				);
+				m_units.emplace_back(pUnit);
+			}
+
+			// アイテムの生成
+			{
+				const Point testKeyPos{ 1, 1 };
+				auto* pItem = new Item();
+				pItem->setPos(MapPosToGlobalPos(testKeyPos));
+				pItem->setSrcRect(RectF{ 9 * chipSize, 9 * chipSize, chipSize, chipSize });
+				pItem->setTexture(U"dungeon_tileset");
+				m_items.emplace_back(pItem);
 			}
 
 		}
@@ -246,6 +275,14 @@ namespace bnscup
 			if (m_pMapView)
 			{
 				m_pMapView->draw();
+			}
+
+			for (const auto& item : m_items)
+			{
+				if (item)
+				{
+					item->draw();
+				}
 			}
 
 			for (const auto& unit : m_units)
