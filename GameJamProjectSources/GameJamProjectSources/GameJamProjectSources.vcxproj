@@ -120,6 +120,7 @@
     <ClCompile Include="DebugPlayer\DebugPlayer.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MessageBox\MessageBox.cpp" />
     <ClCompile Include="Scene\Exit\ExitScene.cpp" />
     <ClCompile Include="Scene\Game\GameScene.cpp" />
     <ClCompile Include="Scene\Game\Map\MapData.cpp" />
@@ -335,6 +336,7 @@
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="DebugPlayer\DebugPlayer.h" />
     <ClInclude Include="Item\Item.h" />
+    <ClInclude Include="MessageBox\MessageBox.h" />
     <ClInclude Include="Scene\Exit\ExitScene.h" />
     <ClInclude Include="Scene\Game\GameScene.h" />
     <ClInclude Include="Scene\Game\Map\MapData.h" />

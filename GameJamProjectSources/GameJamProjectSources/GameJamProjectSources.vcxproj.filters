@@ -171,6 +171,9 @@
     <Filter Include="Source Files\Item">
       <UniqueIdentifier>{df4ccf92-152b-4f92-bb04-a4b1ef975488}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MessageBox">
+      <UniqueIdentifier>{86e82680-9b21-4206-b510-08f44b9c219f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="Item\Item.cpp">
       <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageBox\MessageBox.cpp">
+      <Filter>Source Files\MessageBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -906,6 +912,9 @@
     </ClInclude>
     <ClInclude Include="Item\Item.h">
       <Filter>Source Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageBox\MessageBox.h">
+      <Filter>Source Files\MessageBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

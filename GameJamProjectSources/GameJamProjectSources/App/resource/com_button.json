@@ -55,6 +55,26 @@
 				"code": 0
 			},
 			"iconSize": 0
+		},
+		{
+			"assetName": "icon_cross",
+			"path": "",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 1,
+				"code": 983382
+			},
+			"iconSize": 24
 		}
 	]
 }

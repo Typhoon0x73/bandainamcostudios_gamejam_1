@@ -18,6 +18,7 @@ namespace bnscup
 		AssetNameView getTilesetTextureName() const;
 
 		const Array<RoomData>& getRooms() const;
+		RoomData& getRoomData(const Point& pos);
 		const RoomData& getRoomData(const Point& pos) const;
 		const Size& getMapSize() const;
 		int32 getChipSize() const;

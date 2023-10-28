@@ -32,6 +32,13 @@ namespace bnscup
 		return m_rooms;
 	}
 
+	RoomData& MapData::getRoomData(const Point& pos)
+	{
+		const int32 index = pos.y * m_mapSize.x + pos.x;
+		DEBUG_BREAK((m_rooms.size() <= index or index < 0));
+		return m_rooms[index];
+	}
+
 	const RoomData& MapData::getRoomData(const Point& pos) const
 	{
 		const int32 index = pos.y * m_mapSize.x + pos.x;

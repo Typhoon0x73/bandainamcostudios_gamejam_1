@@ -6,6 +6,7 @@
 #include "../../Unit/Unit.h"
 #include "../../Item/Item.h"
 #include "../../Button/Button.h"
+#include "../../MessageBox/MessageBox.h"
 
 namespace
 {
@@ -90,6 +91,13 @@ namespace bnscup
 			Idle,
 			Move,
 			Pause,
+			UseKeyPopup,
+		};
+
+		struct UnlockRoomData
+		{
+			RoomData* pTargetRoom;
+			RoomData::Route unlockRoute;
 		};
 
 	public:
@@ -106,6 +114,9 @@ namespace bnscup
 		void stepIdle();
 		void stepMove();
 		void stepPause();
+		void stepUseKeyPopup();
+
+		void createUseKeyPopup();
 
 	private:
 
@@ -124,6 +135,8 @@ namespace bnscup
 		Texture m_controllerTexture;
 		Button m_controlButtons[4];
 
+		std::unique_ptr<MessageBox> m_pMessageBox;
+		Optional<UnlockRoomData> m_unlockRoomData;
 
 		Audio m_collectItemSE;
 		Audio m_unlockDoorSE;
@@ -148,6 +161,8 @@ namespace bnscup
 			, Button(CIRCLE_CONTROLLER_DOWN_AREA)
 			, Button(CIRCLE_CONTROLLER_LEFT_AREA)
 			, Button(CIRCLE_CONTROLLER_RIGHT_AREA) }
+		, m_pMessageBox{ nullptr }
+		, m_unlockRoomData{ none }
 		, m_collectItemSE{}
 		, m_unlockDoorSE{}
 	{
@@ -170,6 +185,22 @@ namespace bnscup
 			);
 			m_pMapData.reset(pMapData);
 
+			// 救助対象ユニット
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 0, 0 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 256, 16, 32 } },
+						{ 0.175s, RectF{ 144, 256, 16, 32 } },
+						{ 0.175s, RectF{ 160, 256, 16, 32 } },
+						{ 0.175s, RectF{ 176, 256, 16, 32 } },
+					}
+				);
+				m_units.emplace_back(pUnit);
+			}
+
 			const Point startRoom{ 0, 2 };
 
 			// プレイヤーの生成
@@ -187,21 +218,6 @@ namespace bnscup
 				);
 				m_pPlayerUnit = pPlayerUnit;
 				m_units.emplace_back(pPlayerUnit);
-			}
-			// 救助対象ユニット
-			{
-				auto* pUnit = new Unit();
-				pUnit->setPos(MapPosToGlobalPos(Point{ 0, 0 }));
-				pUnit->setTexture(U"dungeon_tileset_2");
-				pUnit->setAnimRect(
-					{
-						{ 0.175s, RectF{ 128, 256, 16, 32 } },
-						{ 0.175s, RectF{ 144, 256, 16, 32 } },
-						{ 0.175s, RectF{ 160, 256, 16, 32 } },
-						{ 0.175s, RectF{ 176, 256, 16, 32 } },
-					}
-				);
-				m_units.emplace_back(pUnit);
 			}
 
 			// アイテムの生成
@@ -247,6 +263,7 @@ namespace bnscup
 		case Step::Idle:		stepIdle();			break;
 		case Step::Move:		stepMove();			break;
 		case Step::Pause:		stepPause();		break;
+		case Step::UseKeyPopup:	stepUseKeyPopup();	break;
 		default: DEBUG_BREAK(true); break;
 		}
 	}
@@ -304,6 +321,11 @@ namespace bnscup
 			}
 		}
 		m_renderTarget.rounded(ROUNDRECT_MAPVIEW_AREA.r).drawAt(ROUNDRECT_MAPVIEW_AREA.center());
+
+		if (m_pMessageBox)
+		{
+			m_pMessageBox->draw();
+		}
 	}
 
 	void GameScene::Impl::stepAssign()
@@ -371,7 +393,7 @@ namespace bnscup
 				if (m_controlButtons[i].isSelected(Button::Sounds::Select))
 				{
 					Point mapPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
-					const auto& nowRoom = m_pMapData->getRoomData(mapPos);
+					auto& nowRoom = m_pMapData->getRoomData(mapPos);
 					const auto& route = ROUTE_TABLE[i];
 					if (route.first == RoomData::Route::Left)
 					{
@@ -386,6 +408,9 @@ namespace bnscup
 						if (nowRoom.isLocked(route.first))
 						{
 							// 鍵がかかっている
+							m_unlockRoomData.emplace(&nowRoom, route.first);
+							createUseKeyPopup();
+							return;
 						}
 						else
 						{
@@ -408,12 +433,15 @@ namespace bnscup
 								DEBUG_BREAK(true);
 								break;
 							}
-							const auto& targetRoom = m_pMapData->getRoomData(mapPos);
+							auto& targetRoom = m_pMapData->getRoomData(mapPos);
 							if (targetRoom.canPassable(route.second))
 							{
 								if (targetRoom.isLocked(route.second))
 								{
 									// 鍵がかかっている
+									m_unlockRoomData.emplace(&targetRoom, route.second);
+									createUseKeyPopup();
+									return;
 								}
 								else
 								{
@@ -460,6 +488,47 @@ namespace bnscup
 
 	void GameScene::Impl::stepPause()
 	{
+	}
+
+	void GameScene::Impl::stepUseKeyPopup()
+	{
+		if (m_pMessageBox.get() == nullptr)
+		{
+			DEBUG_BREAK(true); // 処理しようがない。
+			m_step = Step::Idle;
+			return;
+		}
+
+		m_pMessageBox->update();
+
+		if (m_pMessageBox->isYesSelected())
+		{
+			// アンロック
+			if (m_unlockRoomData)
+			{
+				m_unlockRoomData->pTargetRoom->unlock(m_unlockRoomData->unlockRoute);
+				m_unlockDoorSE.playOneShot();
+			}
+		}
+		else if (m_pMessageBox->isNoSelected() or m_pMessageBox->isExitCrossSelected())
+		{
+			// メッセージキャンセル
+		}
+		else
+		{
+			return;
+		}
+
+		// 処理終わり
+		m_pMessageBox.reset();
+		m_step = Step::Idle;
+	}
+
+	void GameScene::Impl::createUseKeyPopup()
+	{
+		auto* messageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"鍵を使用しますか？");
+		m_pMessageBox.reset(messageBox);
+		m_step = Step::UseKeyPopup;
 	}
 	
 	//==================================================
