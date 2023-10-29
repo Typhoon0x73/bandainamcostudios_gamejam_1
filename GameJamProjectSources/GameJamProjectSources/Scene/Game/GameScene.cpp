@@ -194,6 +194,9 @@ namespace bnscup
 			, static_cast<uint32>(ROUNDRECT_MAPVIEW_AREA.rect.size.y) }
 		, m_pPlayerUnit{ nullptr }
 		, m_units{}
+		, m_targetUnits{}
+		, m_enemies{}
+		, m_holdKeys{}
 		, m_items{}
 		, m_controllerTexture{}
 		, m_controlButtons{
