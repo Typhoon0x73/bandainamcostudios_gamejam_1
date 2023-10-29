@@ -177,6 +177,9 @@
     <Filter Include="Source Files\TeleportAnim">
       <UniqueIdentifier>{60a379d8-b721-4fc0-84d1-154e04e2e08d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Game\Pause">
+      <UniqueIdentifier>{d7acb9dc-d88d-49fd-b1b1-1c9a76c592fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -235,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="TeleportAnim\TeleportAnim.cpp">
       <Filter>Source Files\TeleportAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Game\Pause\PauseView.cpp">
+      <Filter>Source Files\Scene\Game\Pause</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -924,6 +930,9 @@
     </ClInclude>
     <ClInclude Include="TeleportAnim\TeleportAnim.h">
       <Filter>Source Files\TeleportAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Game\Pause\PauseView.h">
+      <Filter>Source Files\Scene\Game\Pause</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

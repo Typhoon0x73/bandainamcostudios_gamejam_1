@@ -9,6 +9,15 @@
 			"faceIndex": 0,
 			"typeface": 10,
 			"style": 0
+		},
+		{
+			"assetName": "font_pause_view",
+			"fontMethod": 2,
+			"fontSize": 48,
+			"path": "",
+			"faceIndex": 0,
+			"typeface": 10,
+			"style": 0
 		}
 	],
 	"audioAssetDatas": [

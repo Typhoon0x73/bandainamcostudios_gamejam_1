@@ -3,6 +3,7 @@
 #include "Map/MapData.h"
 #include "Map/MapView.h"
 #include "Map/RoomData.h"
+#include "Pause/PauseView.h"
 #include "../../Unit/Unit.h"
 #include "../../Item/Item.h"
 #include "../../Button/Button.h"
@@ -57,6 +58,11 @@ namespace
 	static const RectF RECT_EXIT_BUTTON =
 	{
 		1120, 670, 80, 40,
+	};
+
+	static const RectF RECT_PAUSE_BUTTON =
+	{
+		1120, 30, 120, 60,
 	};
 
 	// 描画された最大のアルファ成分を保持するブレンドステートを作成する
@@ -169,6 +175,8 @@ namespace bnscup
 		Texture m_controllerTexture;
 		Button m_controlButtons[4];
 		Button m_exitButton;
+		Button m_pauseButton;
+		PauseView m_pauseView;
 
 		std::unique_ptr<MessageBox> m_pMessageBox;
 		Optional<UnlockRoomData> m_unlockRoomData;
@@ -205,6 +213,8 @@ namespace bnscup
 			, Button(CIRCLE_CONTROLLER_LEFT_AREA)
 			, Button(CIRCLE_CONTROLLER_RIGHT_AREA) }
 		, m_exitButton{ RECT_EXIT_BUTTON }
+		, m_pauseButton{ RECT_PAUSE_BUTTON }
+		, m_pauseView{}
 		, m_pMessageBox{ nullptr }
 		, m_unlockRoomData{ none }
 		, m_pRescueUnitTarget{ nullptr }
@@ -294,6 +304,9 @@ namespace bnscup
 			m_pMapView.reset(pMapView);
 		}
 
+		// ポーズ画面は閉じておく
+		m_pauseView.setEnable(false);
+
 		m_controllerTexture = TextureAsset(U"controller_switch");
 		m_buttonFont = FontAsset(U"font_button");
 		m_collectItemSE = AudioAsset(U"sd_collect_item");
@@ -332,6 +345,14 @@ namespace bnscup
 	void GameScene::Impl::draw() const
 	{
 		ROUNDRECT_STAGENO_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
+
+		// ポーズボタン
+		{
+			const auto& buttonRect = m_pauseButton.getRect();
+			buttonRect.rounded(3).draw(Palette::Darkolivegreen).drawFrame(1.0, Palette::Black);
+			m_buttonFont(U"PAUSE").drawAt(buttonRect.center(), Palette::Black);
+		}
+
 		ROUNDRECT_MAPVIEW_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
 		ROUNDRECT_LOG_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
 
@@ -395,6 +416,9 @@ namespace bnscup
 			m_buttonFont(U"脱出").drawAt(buttonRect.center(), Palette::Black);
 		}
 
+		// ポーズウィンドウ
+		m_pauseView.draw();
+
 		if (m_pMessageBox)
 		{
 			m_pMessageBox->draw();
@@ -431,12 +455,23 @@ namespace bnscup
 			button.update();
 		}
 
+		m_pauseButton.update();
+
 		m_exitButton.update();
+
+		if (m_pauseButton.isSelected(Button::Sounds::Select))
+		{
+			m_pauseView.setEnable(true);
+			m_step = Step::Pause;
+			return;
+		}
+
 		if (m_exitButton.isSelected(Button::Sounds::Select))
 		{
 			createReturnPopup();
 			return;
 		}
+
 
 		if (m_pPlayerUnit)
 		{
@@ -589,6 +624,26 @@ namespace bnscup
 
 	void GameScene::Impl::stepPause()
 	{
+		m_pauseView.update();
+
+		Step nextStep = Step::Pause;
+		if (m_pauseView.isCloseViewButtonSelected())
+		{
+			// 閉じる
+			m_pauseView.setEnable(false);
+			nextStep = Step::Idle;
+		}
+		else if (m_pauseView.isReturnStageSelectButtonSelected())
+		{
+			m_nextScene = SceneKey::StageSelect;
+			nextStep = Step::End;
+		}
+		else if (m_pauseView.isReturnTitleButtonSelected())
+		{
+			m_nextScene = SceneKey::Title;
+			nextStep = Step::End;
+		}
+		m_step = nextStep;
 	}
 
 	void GameScene::Impl::stepRescueAnim()

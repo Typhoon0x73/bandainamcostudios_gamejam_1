@@ -126,6 +126,7 @@
     <ClCompile Include="Scene\Game\Map\MapData.cpp" />
     <ClCompile Include="Scene\Game\Map\MapView.cpp" />
     <ClCompile Include="Scene\Game\Map\RoomData.cpp" />
+    <ClCompile Include="Scene\Game\Pause\PauseView.cpp" />
     <ClCompile Include="Scene\Load\LoadScene.cpp" />
     <ClCompile Include="Scene\StageSelect\StageSelectScene.cpp" />
     <ClCompile Include="Scene\StageSelect\StageSelectView.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="Scene\Game\Map\MapData.h" />
     <ClInclude Include="Scene\Game\Map\MapView.h" />
     <ClInclude Include="Scene\Game\Map\RoomData.h" />
+    <ClInclude Include="Scene\Game\Pause\PauseView.h" />
     <ClInclude Include="Scene\Load\LoadScene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\StageSelect\StageSelectScene.h" />
