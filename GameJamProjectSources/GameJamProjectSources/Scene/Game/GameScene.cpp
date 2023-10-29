@@ -5,6 +5,7 @@
 #include "Map/RoomData.h"
 #include "Pause/PauseView.h"
 #include "../../Unit/Unit.h"
+#include "../../Unit/Enemy.h"
 #include "../../Item/Item.h"
 #include "../../Button/Button.h"
 #include "../../MessageBox/MessageBox.h"
@@ -109,6 +110,7 @@ namespace bnscup
 			RescuePopup,
 			ReturnPopup,
 			CommonPopup,
+			GameOver,
 			Result,
 			End,
 		};
@@ -150,12 +152,16 @@ namespace bnscup
 		void stepRescuePopup();
 		void stepReturnPopup();
 		void stepCommonPopup();
+		void stepGameOver();
 		void stepResult();
 
 		void createUseKeyPopup();
 		void createRescuePopup();
 		void createReturnPopup();
 		void createNotHaveKeyPopup();
+
+		void enemyMove();
+		void checkEnemyMoveDir(Enemy* pEnemy);
 
 	private:
 
@@ -170,7 +176,7 @@ namespace bnscup
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
 		Array<RescueUnitData> m_targetUnits;
-		Array<Unit*> m_enemies;
+		Array<Enemy*> m_enemies;
 
 		Array<Item*> m_holdKeys;
 		Array<std::unique_ptr<Item>> m_items;
@@ -227,7 +233,7 @@ namespace bnscup
 		, m_unlockDoorSE{}
 	{
 		// あとでステージ生成クラスとかにまとめたい
-		if (stageNo == 0)
+		if (stageNo == 0 or stageNo == 2)
 		{
 			const int32 chipSize = 16;
 			const int32 roomCountX = 2;
@@ -283,9 +289,93 @@ namespace bnscup
 
 			// アイテムの生成
 			{
-				const Point testKeyPos{ 1, 1 };
+				const Point keyPos{ 1, 1 };
 				auto* pItem = new Item(Item::Type::GoldKey);
-				pItem->setPos(MapPosToGlobalPos(testKeyPos));
+				pItem->setPos(MapPosToGlobalPos(keyPos));
+				pItem->setSrcRect(RectF{ 9 * chipSize, 9 * chipSize, chipSize, chipSize });
+				pItem->setTexture(U"dungeon_tileset");
+				m_items.emplace_back(pItem);
+			}
+
+		}
+		else if (stageNo == 1)
+		{
+
+			const int32 chipSize = 16;
+			const int32 roomCountX = 3;
+			const int32 roomCountY = 3;
+
+			// マップの生成
+			auto* pMapData = new MapData(
+				{
+					RoomData{ FromEnum(RoomData::Route::Down)       , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Right)        , FromEnum(RoomData::Route::Right) }, RoomData{ FromEnum(RoomData::Route::DownLeft)  , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None)  }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRight)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None)  }, RoomData{ FromEnum(RoomData::Route::UpLeft)    , FromEnum(RoomData::Route::None) },
+				},
+				U"dungeon_tileset",
+				roomCountX, roomCountY, chipSize
+				);
+			m_pMapData.reset(pMapData);
+
+			// 救助対象ユニット
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 1, 0 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 256, 16, 32 } },
+						{ 0.175s, RectF{ 144, 256, 16, 32 } },
+						{ 0.175s, RectF{ 160, 256, 16, 32 } },
+						{ 0.175s, RectF{ 176, 256, 16, 32 } },
+					}
+				);
+				m_targetUnits.emplace_back(Rescued::No, pUnit);
+				m_units.emplace_back(pUnit);
+			}
+
+			const Point startRoom{ 0, 1 };
+
+			// プレイヤーの生成
+			{
+				auto* pPlayerUnit = new Unit();
+				pPlayerUnit->setPos(MapPosToGlobalPos(startRoom));
+				pPlayerUnit->setTexture(U"dungeon_tileset_2");
+				pPlayerUnit->setAnimRect(
+					{
+						{ 0.2s, RectF{ 128, 64, 16, 32 } },
+						{ 0.2s, RectF{ 144, 64, 16, 32 } },
+						{ 0.2s, RectF{ 160, 64, 16, 32 } },
+						{ 0.2s, RectF{ 176, 64, 16, 32 } },
+					}
+				);
+				m_pPlayerUnit = pPlayerUnit;
+				m_units.emplace_back(pPlayerUnit);
+			}
+
+			// 敵の生成
+			{
+				auto* pEnemy = new Enemy();
+				pEnemy->setPos(MapPosToGlobalPos(Point{ 2, 0 }));
+				pEnemy->setMoveType(Enemy::MoveType::UpDown);
+				pEnemy->setTexture(U"dungeon_tileset_2");
+				pEnemy->setAnimRect(
+					{
+						{ 0.15s, RectF{ 368, 272, 16, 24 } },
+						{ 0.15s, RectF{ 384, 272, 16, 24 } },
+						{ 0.15s, RectF{ 400, 272, 16, 24 } },
+						{ 0.15s, RectF{ 416, 272, 16, 24 } },
+					}
+				);
+				m_enemies.emplace_back(pEnemy);
+				m_units.emplace_back(pEnemy);
+			}
+
+			// アイテムの生成
+			{
+				const Point keyPos{ 1, 2 };
+				auto* pItem = new Item(Item::Type::GoldKey);
+				pItem->setPos(MapPosToGlobalPos(keyPos));
 				pItem->setSrcRect(RectF{ 9 * chipSize, 9 * chipSize, chipSize, chipSize });
 				pItem->setTexture(U"dungeon_tileset");
 				m_items.emplace_back(pItem);
@@ -340,6 +430,7 @@ namespace bnscup
 		case Step::RescuePopup:	stepRescuePopup();	break;
 		case Step::ReturnPopup:	stepReturnPopup();	break;
 		case Step::CommonPopup:	stepCommonPopup();	break;
+		case Step::GameOver:	stepGameOver();		break;
 		case Step::Result:		stepResult();		break;
 		case Step::End:			break;
 		default:				DEBUG_BREAK(true);	break; // ステップの処理追加忘れ
@@ -500,6 +591,22 @@ namespace bnscup
 					}
 				}
 			}
+			for (auto& pEnemy : m_enemies)
+			{
+				if (pEnemy)
+				{
+					if (not(pEnemy->isEnable()))
+					{
+						continue;
+					}
+					const auto& enemyPos = MapPosFromGlobalPos(pEnemy->getPos());
+					if (playerPos == enemyPos)
+					{
+						m_step = Step::GameOver;
+						return;
+					}
+				}
+			}
 
 			for (auto& targetUnit : m_targetUnits)
 			{
@@ -581,6 +688,29 @@ namespace bnscup
 								DEBUG_BREAK(true);
 								break;
 							}
+							// 移動先に敵がいないか確認
+							for (auto& pEnemy : m_enemies)
+							{
+								const auto& enemyPos = MapPosFromGlobalPos(pEnemy->getPos());
+								if (mapPos == enemyPos)
+								{
+									const auto& playerMoveDir = route.first;
+									const auto& enemyMoveDir = pEnemy->getMoveDirection();
+									// 移動方向に対して向かい合っているか
+									// ルート用のクラスに分けて計算できると楽
+									if (
+										   (playerMoveDir == RoomData::Route::Up    and enemyMoveDir == RoomData::Route::Down )
+										or (playerMoveDir == RoomData::Route::Right and enemyMoveDir == RoomData::Route::Left )
+										or (playerMoveDir == RoomData::Route::Down  and enemyMoveDir == RoomData::Route::Up   )
+										or (playerMoveDir == RoomData::Route::Left  and enemyMoveDir == RoomData::Route::Right)
+										)
+									{
+										enemyMove();
+										m_step = Step::Move;
+										return;
+									}
+								}
+							}
 							auto& targetRoom = m_pMapData->getRoomData(mapPos);
 							if (targetRoom.canPassable(route.second))
 							{
@@ -603,6 +733,7 @@ namespace bnscup
 								{
 									// 通れる
 									m_pPlayerUnit->setTargetPos(MapPosToGlobalPos(mapPos));
+									enemyMove();
 									m_step = Step::Move;
 									return;
 								}
@@ -633,6 +764,13 @@ namespace bnscup
 		{
 			return;
 		}
+
+
+		for (auto& pEnemy : m_enemies)
+		{
+			checkEnemyMoveDir(pEnemy);
+		}
+
 		m_step = Step::Idle;
 	}
 
@@ -816,6 +954,13 @@ namespace bnscup
 		}
 	}
 
+	void GameScene::Impl::stepGameOver()
+	{
+		m_nextScene = SceneKey::StageSelect;
+		m_step = Step::End;
+		return;
+	}
+
 	void GameScene::Impl::stepResult()
 	{
 		m_nextScene = SceneKey::StageSelect;
@@ -870,6 +1015,53 @@ namespace bnscup
 		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::OnlyOK, MessageBox::ExistCrossButton::No, message);
 		m_pMessageBox.reset(pMessageBox);
 		m_step = Step::CommonPopup;
+	}
+
+	void GameScene::Impl::enemyMove()
+	{
+		for (auto& pEnemy : m_enemies)
+		{
+			if (pEnemy == nullptr)
+			{
+				continue;
+			}
+			checkEnemyMoveDir(pEnemy);
+			Point enemyPos = MapPosFromGlobalPos(pEnemy->getPos());
+			switch (pEnemy->getMoveDirection())
+			{
+			case RoomData::Route::Up: enemyPos.y -= 1; break;
+			case RoomData::Route::Right: enemyPos.x += 1; break;
+			case RoomData::Route::Down: enemyPos.y += 1; break;
+			case RoomData::Route::Left: enemyPos.x -= 1; break;
+			default: DEBUG_BREAK(true); break;
+			}
+			pEnemy->setTargetPos(MapPosToGlobalPos(enemyPos));
+		}
+	}
+
+	void GameScene::Impl::checkEnemyMoveDir(Enemy* pEnemy)
+	{
+		if (pEnemy == nullptr)
+		{
+			return;
+		}
+		Point enemyPos = MapPosFromGlobalPos(pEnemy->getPos());
+		const auto& roomData = m_pMapData->getRoomData(enemyPos);
+		if (not(roomData.canPassable(pEnemy->getMoveDirection())))
+		{
+			if (pEnemy->getMoveType() == Enemy::MoveType::UpDown)
+			{
+				if (pEnemy->getMoveDirection() == RoomData::Route::Up)
+				{
+					pEnemy->setMoveDirection(RoomData::Route::Down);
+				}
+				else
+				{
+					pEnemy->setMoveDirection(RoomData::Route::Up);
+				}
+			}
+			DEBUG_BREAK(not(roomData.canPassable(pEnemy->getMoveDirection())));
+		}
 	}
 	
 	//==================================================

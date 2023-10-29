@@ -137,6 +137,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TeleportAnim\TeleportAnim.cpp" />
+    <ClCompile Include="Unit\Enemy.cpp" />
     <ClCompile Include="Unit\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +354,7 @@
     <ClInclude Include="Scene\Title\TitleView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TeleportAnim\TeleportAnim.h" />
+    <ClInclude Include="Unit\Enemy.h" />
     <ClInclude Include="Unit\Unit.h" />
   </ItemGroup>
   <ItemGroup>

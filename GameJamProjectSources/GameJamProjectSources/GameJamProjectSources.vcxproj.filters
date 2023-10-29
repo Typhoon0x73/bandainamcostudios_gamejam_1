@@ -242,6 +242,9 @@
     <ClCompile Include="Scene\Game\Pause\PauseView.cpp">
       <Filter>Source Files\Scene\Game\Pause</Filter>
     </ClCompile>
+    <ClCompile Include="Unit\Enemy.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -933,6 +936,9 @@
     </ClInclude>
     <ClInclude Include="Scene\Game\Pause\PauseView.h">
       <Filter>Source Files\Scene\Game\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit\Enemy.h">
+      <Filter>Source Files\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
