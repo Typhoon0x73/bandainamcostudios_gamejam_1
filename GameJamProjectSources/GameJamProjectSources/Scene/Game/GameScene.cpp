@@ -108,6 +108,7 @@ namespace bnscup
 			UseKeyPopup,
 			RescuePopup,
 			ReturnPopup,
+			CommonPopup,
 			Result,
 			End,
 		};
@@ -148,11 +149,13 @@ namespace bnscup
 		void stepUseKeyPopup();
 		void stepRescuePopup();
 		void stepReturnPopup();
+		void stepCommonPopup();
 		void stepResult();
 
 		void createUseKeyPopup();
 		void createRescuePopup();
 		void createReturnPopup();
+		void createNotHaveKeyPopup();
 
 	private:
 
@@ -336,6 +339,7 @@ namespace bnscup
 		case Step::UseKeyPopup:	stepUseKeyPopup();	break;
 		case Step::RescuePopup:	stepRescuePopup();	break;
 		case Step::ReturnPopup:	stepReturnPopup();	break;
+		case Step::CommonPopup:	stepCommonPopup();	break;
 		case Step::Result:		stepResult();		break;
 		case Step::End:			break;
 		default:				DEBUG_BREAK(true);	break; // ステップの処理追加忘れ
@@ -550,6 +554,11 @@ namespace bnscup
 								createUseKeyPopup();
 								return;
 							}
+							else
+							{
+								createNotHaveKeyPopup();
+								return;
+							}
 						}
 						else
 						{
@@ -582,6 +591,11 @@ namespace bnscup
 									{
 										m_unlockRoomData.emplace(&targetRoom, route.second);
 										createUseKeyPopup();
+										return;
+									}
+									else
+									{
+										createNotHaveKeyPopup();
 										return;
 									}
 								}
@@ -654,6 +668,14 @@ namespace bnscup
 			return;
 		}
 		m_teleportAnim.reset();
+		for (const auto& targetUnit : m_targetUnits)
+		{
+			if (not(targetUnit.rescued))
+			{
+				m_step = Step::Idle;
+				return;
+			}
+		}
 		createReturnPopup();
 	}
 
@@ -776,6 +798,24 @@ namespace bnscup
 		m_step = nextStep;
 	}
 
+	void GameScene::Impl::stepCommonPopup()
+	{
+		if (m_pMessageBox.get() == nullptr)
+		{
+			DEBUG_BREAK(true);
+			return;
+		}
+
+		m_pMessageBox->update();
+
+		if (m_pMessageBox->isOKSelected())
+		{
+			m_pMessageBox.reset();
+			m_step = Step::Idle;
+			return;
+		}
+	}
+
 	void GameScene::Impl::stepResult()
 	{
 		m_nextScene = SceneKey::StageSelect;
@@ -820,6 +860,16 @@ namespace bnscup
 		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, exitMessage);
 		m_pMessageBox.reset(pMessageBox);
 		m_step = Step::ReturnPopup;
+	}
+
+	void GameScene::Impl::createNotHaveKeyPopup()
+	{
+		String message =
+			U"鍵がかかっています。\n"
+			U"どこかに落ちている鍵を探しましょう！";
+		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::OnlyOK, MessageBox::ExistCrossButton::No, message);
+		m_pMessageBox.reset(pMessageBox);
+		m_step = Step::CommonPopup;
 	}
 	
 	//==================================================
