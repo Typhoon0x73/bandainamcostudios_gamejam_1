@@ -54,6 +54,11 @@ namespace
 		1230, 840, 40
 	};
 
+	static const RectF RECT_EXIT_BUTTON =
+	{
+		1120, 670, 80, 40,
+	};
+
 	// 描画された最大のアルファ成分を保持するブレンドステートを作成する
 	static const BlendState MakeBlendState()
 	{
@@ -97,6 +102,8 @@ namespace bnscup
 			UseKeyPopup,
 			RescuePopup,
 			ReturnPopup,
+			Result,
+			End,
 		};
 
 		struct UnlockRoomData
@@ -121,6 +128,9 @@ namespace bnscup
 		void update();
 		void draw() const;
 
+		bool isEnd() const;
+		SceneKey getNextScene() const;
+
 	private:
 
 		void stepAssign();
@@ -132,12 +142,15 @@ namespace bnscup
 		void stepUseKeyPopup();
 		void stepRescuePopup();
 		void stepReturnPopup();
+		void stepResult();
 
 		void createUseKeyPopup();
 		void createRescuePopup();
 		void createReturnPopup();
 
 	private:
+
+		SceneKey m_nextScene;
 
 		Step m_step;
 		Camera2D m_camera;
@@ -148,12 +161,14 @@ namespace bnscup
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
 		Array<RescueUnitData> m_targetUnits;
+		Array<Unit*> m_enemies;
 
 		Array<Item*> m_holdKeys;
 		Array<std::unique_ptr<Item>> m_items;
 
 		Texture m_controllerTexture;
 		Button m_controlButtons[4];
+		Button m_exitButton;
 
 		std::unique_ptr<MessageBox> m_pMessageBox;
 		Optional<UnlockRoomData> m_unlockRoomData;
@@ -161,6 +176,7 @@ namespace bnscup
 
 		TeleportAnim m_teleportAnim;
 
+		Font m_buttonFont;
 		Audio m_collectItemSE;
 		Audio m_unlockDoorSE;
 	};
@@ -168,7 +184,8 @@ namespace bnscup
 	//==================================================
 	
 	GameScene::Impl::Impl(int stageNo)
-		: m_step{ Step::Idle }
+		: m_nextScene{ SceneKey::Title }
+		, m_step{ Step::Idle }
 		, m_camera{ Vec2::Zero(), 1.0, Camera2DParameters::NoControl() }
 		, m_pMapData{ nullptr }
 		, m_pMapView{ nullptr }
@@ -184,10 +201,12 @@ namespace bnscup
 			, Button(CIRCLE_CONTROLLER_DOWN_AREA)
 			, Button(CIRCLE_CONTROLLER_LEFT_AREA)
 			, Button(CIRCLE_CONTROLLER_RIGHT_AREA) }
+		, m_exitButton{ RECT_EXIT_BUTTON }
 		, m_pMessageBox{ nullptr }
 		, m_unlockRoomData{ none }
 		, m_pRescueUnitTarget{ nullptr }
 		, m_teleportAnim{}
+		, m_buttonFont{}
 		, m_collectItemSE{}
 		, m_unlockDoorSE{}
 	{
@@ -273,6 +292,7 @@ namespace bnscup
 		}
 
 		m_controllerTexture = TextureAsset(U"controller_switch");
+		m_buttonFont = FontAsset(U"font_button");
 		m_collectItemSE = AudioAsset(U"sd_collect_item");
 		m_unlockDoorSE = AudioAsset(U"sd_unlock_door");
 	}
@@ -300,6 +320,8 @@ namespace bnscup
 		case Step::UseKeyPopup:	stepUseKeyPopup();	break;
 		case Step::RescuePopup:	stepRescuePopup();	break;
 		case Step::ReturnPopup:	stepReturnPopup();	break;
+		case Step::Result:		stepResult();		break;
+		case Step::End:			break;
 		default:				DEBUG_BREAK(true);	break; // ステップの処理追加忘れ
 		}
 	}
@@ -363,10 +385,27 @@ namespace bnscup
 		}
 		m_renderTarget.rounded(ROUNDRECT_MAPVIEW_AREA.r).drawAt(ROUNDRECT_MAPVIEW_AREA.center());
 
+		// 脱出ボタン
+		{
+			const auto& buttonRect = m_exitButton.getRect();
+			buttonRect.rounded(3).draw(Palette::Darkred).drawFrame(1.0, Palette::Black);
+			m_buttonFont(U"脱出").drawAt(buttonRect.center(), Palette::Black);
+		}
+
 		if (m_pMessageBox)
 		{
 			m_pMessageBox->draw();
 		}
+	}
+
+	bool GameScene::Impl::isEnd() const
+	{
+		return (m_step == Step::End);
+	}
+
+	SceneKey GameScene::Impl::getNextScene() const
+	{
+		return m_nextScene;
 	}
 
 	void GameScene::Impl::stepAssign()
@@ -387,6 +426,13 @@ namespace bnscup
 		for (auto& button : m_controlButtons)
 		{
 			button.update();
+		}
+
+		m_exitButton.update();
+		if (m_exitButton.isSelected(Button::Sounds::Select))
+		{
+			createReturnPopup();
+			return;
 		}
 
 		if (m_pPlayerUnit)
@@ -666,6 +712,13 @@ namespace bnscup
 		m_step = nextStep;
 	}
 
+	void GameScene::Impl::stepResult()
+	{
+		m_nextScene = SceneKey::StageSelect;
+		m_step = Step::End;
+		return;
+	}
+
 	void GameScene::Impl::createUseKeyPopup()
 	{
 		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"鍵を使用しますか？");
@@ -723,6 +776,12 @@ namespace bnscup
 		if (m_pImpl)
 		{
 			m_pImpl->update();
+			if (m_pImpl->isEnd())
+			{
+				auto& sceneData = getData();
+				sceneData.nextScene = m_pImpl->getNextScene();
+				changeScene(SceneKey::Load, 1.0s);
+			}
 		}
 	}
 

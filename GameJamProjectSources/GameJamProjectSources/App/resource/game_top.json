@@ -1,5 +1,16 @@
 {
 	"packName": "game_top",
+	"fontAssetDatas": [
+		{
+			"assetName": "font_button",
+			"fontMethod": 2,
+			"fontSize": 28,
+			"path": "",
+			"faceIndex": 0,
+			"typeface": 10,
+			"style": 0
+		}
+	],
 	"audioAssetDatas": [
 		{
 			"assetName": "sd_collect_item",
