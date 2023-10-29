@@ -17,6 +17,7 @@ namespace bnscup
 		void update();
 		void draw() const;
 
+		int32 getSelectStageNo() const;
 		bool isPlayButtonSelected() const;
 		bool isReturnTitleSelected() const;
 
@@ -27,7 +28,12 @@ namespace bnscup
 	private:
 
 		Font m_playButtonFont;
+		Font m_stageNoFont;
 		Texture m_returnMarkIcon;
+
+		int32 m_selectStageNo;
+		Array<std::unique_ptr<Button>> m_pStageButtons;
+
 		std::unique_ptr<Button> m_pPlayGameButton;
 		std::unique_ptr<Button> m_pReturnTitleButton;
 

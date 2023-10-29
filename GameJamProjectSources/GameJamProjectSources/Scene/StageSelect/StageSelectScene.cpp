@@ -49,7 +49,7 @@ namespace bnscup
 		if (m_stageSelectView.isPlayButtonSelected())
 		{
 			m_nextScene = SceneKey::Game;
-			m_stageNo = 0;
+			m_stageNo = m_stageSelectView.getSelectStageNo();
 			m_isEnd = true;
 			return;
 		}

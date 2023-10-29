@@ -9,6 +9,15 @@
 			"faceIndex": 0,
 			"typeface": 10,
 			"style": 0
+		},		
+		{
+			"assetName": "font_stage_no_button",
+			"fontMethod": 2,
+			"fontSize": 32,
+			"path": "",
+			"faceIndex": 0,
+			"typeface": 10,
+			"style": 0
 		}
 	],
 	"textureAssetDatas": [

@@ -22,6 +22,12 @@ namespace
 	{
 		60, 60, 50, 50
 	};
+
+	static const RectF RECT_STAGE_BUTTON =
+	{
+		ROUNDRECT_BASE.x + 50, ROUNDRECT_BASE.y + 50,
+		200, 100
+	};
 }
 
 namespace bnscup
@@ -30,6 +36,8 @@ namespace bnscup
 	StageSelectView::StageSelectView()
 		: m_pPlayGameButton{ nullptr }
 		, m_pReturnTitleButton{ nullptr }
+		, m_selectStageNo{}
+		, m_pStageButtons{}
 		, m_playButtonFont{}
 		, m_returnMarkIcon{}
 	{
@@ -49,6 +57,15 @@ namespace bnscup
 		if (m_pReturnTitleButton)
 		{
 			m_pReturnTitleButton->update();
+		}
+		for (size_t i : step(m_pStageButtons.size()))
+		{
+			auto* pButton = m_pStageButtons[i].get();
+			pButton->update();
+			if (pButton->isSelected(Button::Sounds::Select))
+			{
+				m_selectStageNo = i;
+			}
 		}
 	}
 
@@ -70,6 +87,23 @@ namespace bnscup
 			rect.rounded(5).draw(Palette::Orangered).drawFrame();
 			m_returnMarkIcon.drawAt(rect.center());
 		}
+
+		for (size_t i : step(m_pStageButtons.size()))
+		{
+			auto* pButton = m_pStageButtons[i].get();
+			const auto& buttonRect = pButton->getRect();
+			buttonRect.rounded(5).draw(Palette::Palegoldenrod).drawFrame();
+			m_stageNoFont(U"ステージ{}"_fmt(i + 1)).drawAt(buttonRect.center(), Palette::Black);
+			if (i == m_selectStageNo)
+			{
+				buttonRect.rounded(5).drawFrame(1.0, Palette::Blue);
+			}
+		}
+	}
+
+	int32 StageSelectView::getSelectStageNo() const
+	{
+		return m_selectStageNo;
 	}
 
 	bool StageSelectView::isPlayButtonSelected() const
@@ -96,12 +130,21 @@ namespace bnscup
 		{
 			m_playButtonFont = FontAsset(U"font_play_button");
 			DEBUG_BREAK(m_playButtonFont.isEmpty());
+			m_stageNoFont = FontAsset(U"font_stage_no_button");
+			DEBUG_BREAK(m_stageNoFont.isEmpty());
 		}
 
 		// アイコンの設定
 		{
 			m_returnMarkIcon = TextureAsset(U"icon_return_mark");
 			DEBUG_BREAK(m_returnMarkIcon.isEmpty());
+		}
+
+		// ステージ選択ボタン
+		for (int32 i : step(3))
+		{
+			auto* pButton = new Button(RECT_STAGE_BUTTON.movedBy(Vec2{ i * (RECT_STAGE_BUTTON.size.x + 10.0), 0.0}));
+			m_pStageButtons.emplace_back(pButton);
 		}
 
 		// ゲーム開始ボタンの作成
