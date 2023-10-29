@@ -509,9 +509,12 @@ namespace bnscup
 						if (nowRoom.isLocked(route.first))
 						{
 							// 鍵がかかっている
-							m_unlockRoomData.emplace(&nowRoom, route.first);
-							createUseKeyPopup();
-							return;
+							if (m_holdKeys.size() > 0)
+							{
+								m_unlockRoomData.emplace(&nowRoom, route.first);
+								createUseKeyPopup();
+								return;
+							}
 						}
 						else
 						{
@@ -540,9 +543,12 @@ namespace bnscup
 								if (targetRoom.isLocked(route.second))
 								{
 									// 鍵がかかっている
-									m_unlockRoomData.emplace(&targetRoom, route.second);
-									createUseKeyPopup();
-									return;
+									if (m_holdKeys.size() > 0)
+									{
+										m_unlockRoomData.emplace(&targetRoom, route.second);
+										createUseKeyPopup();
+										return;
+									}
 								}
 								else
 								{
