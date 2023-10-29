@@ -7,6 +7,7 @@
 #include "../../Item/Item.h"
 #include "../../Button/Button.h"
 #include "../../MessageBox/MessageBox.h"
+#include "../../TeleportAnim/TeleportAnim.h"
 
 namespace
 {
@@ -91,7 +92,11 @@ namespace bnscup
 			Idle,
 			Move,
 			Pause,
+			RescueAnim,
+			ReturnAnim,
 			UseKeyPopup,
+			RescuePopup,
+			ReturnPopup,
 		};
 
 		struct UnlockRoomData
@@ -99,6 +104,14 @@ namespace bnscup
 			RoomData* pTargetRoom;
 			RoomData::Route unlockRoute;
 		};
+
+		using Rescued = YesNo<struct Rescued_tag>;
+		struct RescueUnitData
+		{
+			Rescued rescued;
+			Unit* pTargetUnit;
+		};
+
 
 	public:
 
@@ -114,9 +127,15 @@ namespace bnscup
 		void stepIdle();
 		void stepMove();
 		void stepPause();
+		void stepRescueAnim();
+		void stepReturnAnim();
 		void stepUseKeyPopup();
+		void stepRescuePopup();
+		void stepReturnPopup();
 
 		void createUseKeyPopup();
+		void createRescuePopup();
+		void createReturnPopup();
 
 	private:
 
@@ -128,6 +147,7 @@ namespace bnscup
 
 		Unit* m_pPlayerUnit;
 		Array<std::unique_ptr<Unit>> m_units;
+		Array<RescueUnitData> m_targetUnits;
 
 		Array<Item*> m_holdKeys;
 		Array<std::unique_ptr<Item>> m_items;
@@ -137,6 +157,9 @@ namespace bnscup
 
 		std::unique_ptr<MessageBox> m_pMessageBox;
 		Optional<UnlockRoomData> m_unlockRoomData;
+		RescueUnitData* m_pRescueUnitTarget;
+
+		TeleportAnim m_teleportAnim;
 
 		Audio m_collectItemSE;
 		Audio m_unlockDoorSE;
@@ -163,6 +186,8 @@ namespace bnscup
 			, Button(CIRCLE_CONTROLLER_RIGHT_AREA) }
 		, m_pMessageBox{ nullptr }
 		, m_unlockRoomData{ none }
+		, m_pRescueUnitTarget{ nullptr }
+		, m_teleportAnim{}
 		, m_collectItemSE{}
 		, m_unlockDoorSE{}
 	{
@@ -198,6 +223,7 @@ namespace bnscup
 						{ 0.175s, RectF{ 176, 256, 16, 32 } },
 					}
 				);
+				m_targetUnits.emplace_back(Rescued::No, pUnit);
 				m_units.emplace_back(pUnit);
 			}
 
@@ -257,14 +283,24 @@ namespace bnscup
 
 	void GameScene::Impl::update()
 	{
+		if (m_pPlayerUnit)
+		{
+			m_camera.setTargetCenter(m_pPlayerUnit->getPos());
+		}
+		m_camera.update();
+
 		switch (m_step)
 		{
 		case Step::Assign:		stepAssign();		break;
 		case Step::Idle:		stepIdle();			break;
 		case Step::Move:		stepMove();			break;
 		case Step::Pause:		stepPause();		break;
+		case Step::RescueAnim:	stepRescueAnim();	break;
+		case Step::ReturnAnim:	stepReturnAnim();	break;
 		case Step::UseKeyPopup:	stepUseKeyPopup();	break;
-		default: DEBUG_BREAK(true); break;
+		case Step::RescuePopup:	stepRescuePopup();	break;
+		case Step::ReturnPopup:	stepReturnPopup();	break;
+		default:				DEBUG_BREAK(true);	break; // ステップの処理追加忘れ
 		}
 	}
 
@@ -316,9 +352,14 @@ namespace bnscup
 			{
 				if (unit)
 				{
+					if (not(unit->isEnable()))
+					{
+						continue;
+					}
 					unit->draw();
 				}
 			}
+			m_teleportAnim.draw();
 		}
 		m_renderTarget.rounded(ROUNDRECT_MAPVIEW_AREA.r).drawAt(ROUNDRECT_MAPVIEW_AREA.center());
 
@@ -335,12 +376,6 @@ namespace bnscup
 
 	void GameScene::Impl::stepIdle()
 	{
-		if (m_pPlayerUnit)
-		{
-			m_camera.setTargetCenter(m_pPlayerUnit->getPos());
-		}
-		m_camera.update();
-
 		for (auto& unit : m_units)
 		{
 			if (unit)
@@ -356,6 +391,7 @@ namespace bnscup
 
 		if (m_pPlayerUnit)
 		{
+			const auto& playerPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
 			for (auto& item : m_items)
 			{
 				if (item->existOwer())
@@ -367,13 +403,29 @@ namespace bnscup
 				if (item->isKey())
 				{
 					const auto& itemPos = MapPosFromGlobalPos(item->getPos());
-					const auto& playerPos = MapPosFromGlobalPos(m_pPlayerUnit->getPos());
 					if (itemPos == playerPos)
 					{
 						item->setOwner(m_pPlayerUnit);
 						m_holdKeys.emplace_back(item.get());
 						m_collectItemSE.playOneShot();
+						break;
 					}
+				}
+			}
+
+			for (auto& targetUnit : m_targetUnits)
+			{
+				// 救助済み
+				if (targetUnit.rescued)
+				{
+					continue;
+				}
+				const auto& targetPos = MapPosFromGlobalPos(targetUnit.pTargetUnit->getPos());
+				if (targetPos == playerPos)
+				{
+					m_pRescueUnitTarget = &targetUnit;
+					createRescuePopup();
+					return;
 				}
 			}
 		}
@@ -461,12 +513,6 @@ namespace bnscup
 
 	void GameScene::Impl::stepMove()
 	{
-		if (m_pPlayerUnit)
-		{
-			m_camera.setTargetCenter(m_pPlayerUnit->getPos());
-		}
-		m_camera.update();
-
 		bool isMoving = false;
 		for (auto& unit : m_units)
 		{
@@ -488,6 +534,28 @@ namespace bnscup
 
 	void GameScene::Impl::stepPause()
 	{
+	}
+
+	void GameScene::Impl::stepRescueAnim()
+	{
+		m_teleportAnim.update();
+		if (not(m_teleportAnim.isEnd()))
+		{
+			return;
+		}
+		m_teleportAnim.reset();
+		createReturnPopup();
+	}
+
+	void GameScene::Impl::stepReturnAnim()
+	{
+		m_teleportAnim.update();
+		if (not(m_teleportAnim.isEnd()))
+		{
+			return;
+		}
+		m_teleportAnim.reset();
+		m_step = Step::Result;
 	}
 
 	void GameScene::Impl::stepUseKeyPopup()
@@ -520,15 +588,121 @@ namespace bnscup
 		}
 
 		// 処理終わり
+		m_unlockRoomData.reset();
 		m_pMessageBox.reset();
 		m_step = Step::Idle;
 	}
 
+	void GameScene::Impl::stepRescuePopup()
+	{
+		if (m_pMessageBox.get() == nullptr)
+		{
+			DEBUG_BREAK(true); // 処理しようがない。
+			m_pRescueUnitTarget = nullptr;
+			m_step = Step::Idle;
+			return;
+		}
+
+		m_pMessageBox->update();
+
+		Step nextStep = Step::Idle;
+		if (m_pMessageBox->isYesSelected())
+		{
+			m_pRescueUnitTarget->rescued = Rescued::Yes;
+			m_pRescueUnitTarget->pTargetUnit->setEnable(false);
+			m_teleportAnim.setPos(m_pRescueUnitTarget->pTargetUnit->getPos());
+			m_teleportAnim.reset();
+			m_teleportAnim.setEnable(true);
+			nextStep = Step::RescueAnim;
+		}
+		else if (m_pMessageBox->isNoSelected() or m_pMessageBox->isExitCrossSelected())
+		{
+			// メッセージキャンセル
+		}
+		else
+		{
+			return;
+		}
+
+		// 処理終わり
+		m_pRescueUnitTarget = nullptr;
+		m_pMessageBox.reset();
+		m_step = nextStep;
+	}
+
+	void GameScene::Impl::stepReturnPopup()
+	{
+		if (m_pMessageBox.get() == nullptr
+			or m_pPlayerUnit == nullptr)
+		{
+			DEBUG_BREAK(true); // 処理しようがない。
+			m_step = Step::Idle;
+			return;
+		}
+
+		m_pMessageBox->update();
+
+		Step nextStep = Step::Idle;
+		if (m_pMessageBox->isYesSelected())
+		{
+			m_teleportAnim.setPos(m_pPlayerUnit->getPos());
+			m_teleportAnim.reset();
+			m_teleportAnim.setEnable(true);
+			m_pPlayerUnit->setEnable(false);
+			m_pPlayerUnit = nullptr;
+			nextStep = Step::ReturnAnim;
+		}
+		else if (m_pMessageBox->isNoSelected() or m_pMessageBox->isExitCrossSelected())
+		{
+			// メッセージキャンセル
+		}
+		else
+		{
+			return;
+		}
+
+		// 処理終わり
+		m_pMessageBox.reset();
+		m_step = nextStep;
+	}
+
 	void GameScene::Impl::createUseKeyPopup()
 	{
-		auto* messageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"鍵を使用しますか？");
-		m_pMessageBox.reset(messageBox);
+		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"鍵を使用しますか？");
+		m_pMessageBox.reset(pMessageBox);
 		m_step = Step::UseKeyPopup;
+	}
+
+	void GameScene::Impl::createRescuePopup()
+	{
+		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"助けますか？");
+		m_pMessageBox.reset(pMessageBox);
+		m_step = Step::RescuePopup;
+	}
+
+	void GameScene::Impl::createReturnPopup()
+	{
+		String exitMessage = U"";
+		size_t rescueCount = 0;
+		for (const auto& targetUnit : m_targetUnits)
+		{
+			if (targetUnit.rescued)
+			{
+				rescueCount++;
+			}
+		}
+		if (rescueCount != m_targetUnits.size())
+		{
+			exitMessage = U"まだ助けていないユニットがいます。\n";
+		}
+		else
+		{
+			exitMessage = U"すべてのユニットを救助しました！\n";
+		}
+		exitMessage += U"脱出しますか？";
+		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, exitMessage);
+		m_pMessageBox.reset(pMessageBox);
+		m_step = Step::ReturnPopup;
 	}
 	
 	//==================================================

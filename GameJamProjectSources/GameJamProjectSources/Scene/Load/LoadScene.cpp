@@ -25,6 +25,7 @@ namespace bnscup
 				SceneKey::Game,
 				{
 					U"resource/game_top.json",
+					U"resource/teleport_anim.json",
 				}
 			},
 			{

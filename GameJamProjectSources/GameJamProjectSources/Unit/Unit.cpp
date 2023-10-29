@@ -12,6 +12,7 @@ namespace bnscup
 		, m_targetPos{}
 		, m_prevPos{}
 		, m_isMirror{ false }
+		, m_isEnable{ true }
 	{
 	}
 
@@ -82,6 +83,16 @@ namespace bnscup
 	void Unit::setMirror(bool isMirror)
 	{
 		m_isMirror = isMirror;
+	}
+
+	bool Unit::isEnable() const
+	{
+		return m_isEnable;
+	}
+
+	void Unit::setEnable(bool isEnable)
+	{
+		m_isEnable = isEnable;
 	}
 
 }

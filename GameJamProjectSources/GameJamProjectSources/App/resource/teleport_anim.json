@@ -1,0 +1,2005 @@
+{
+	"packName": "teleport_anim",
+	"textureAssetDatas": [
+		{
+			"assetName": "teleport_anim_0001",
+			"path": "resource/textures/teleport-effect-no-rings/0001.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0002",
+			"path": "resource/textures/teleport-effect-no-rings/0002.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0003",
+			"path": "resource/textures/teleport-effect-no-rings/0003.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0004",
+			"path": "resource/textures/teleport-effect-no-rings/0004.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0005",
+			"path": "resource/textures/teleport-effect-no-rings/0005.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0006",
+			"path": "resource/textures/teleport-effect-no-rings/0006.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0007",
+			"path": "resource/textures/teleport-effect-no-rings/0007.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0008",
+			"path": "resource/textures/teleport-effect-no-rings/0008.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0009",
+			"path": "resource/textures/teleport-effect-no-rings/0009.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0010",
+			"path": "resource/textures/teleport-effect-no-rings/0010.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0011",
+			"path": "resource/textures/teleport-effect-no-rings/0011.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0012",
+			"path": "resource/textures/teleport-effect-no-rings/0012.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0013",
+			"path": "resource/textures/teleport-effect-no-rings/0013.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0014",
+			"path": "resource/textures/teleport-effect-no-rings/0014.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0015",
+			"path": "resource/textures/teleport-effect-no-rings/0015.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0016",
+			"path": "resource/textures/teleport-effect-no-rings/0016.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0017",
+			"path": "resource/textures/teleport-effect-no-rings/0017.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0018",
+			"path": "resource/textures/teleport-effect-no-rings/0018.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0019",
+			"path": "resource/textures/teleport-effect-no-rings/0019.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0020",
+			"path": "resource/textures/teleport-effect-no-rings/0020.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0021",
+			"path": "resource/textures/teleport-effect-no-rings/0021.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0022",
+			"path": "resource/textures/teleport-effect-no-rings/0022.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0023",
+			"path": "resource/textures/teleport-effect-no-rings/0023.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0024",
+			"path": "resource/textures/teleport-effect-no-rings/0024.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0025",
+			"path": "resource/textures/teleport-effect-no-rings/0025.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0026",
+			"path": "resource/textures/teleport-effect-no-rings/0026.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0027",
+			"path": "resource/textures/teleport-effect-no-rings/0027.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0028",
+			"path": "resource/textures/teleport-effect-no-rings/0028.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0029",
+			"path": "resource/textures/teleport-effect-no-rings/0029.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0030",
+			"path": "resource/textures/teleport-effect-no-rings/0030.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0031",
+			"path": "resource/textures/teleport-effect-no-rings/0031.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0032",
+			"path": "resource/textures/teleport-effect-no-rings/0032.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0033",
+			"path": "resource/textures/teleport-effect-no-rings/0033.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0034",
+			"path": "resource/textures/teleport-effect-no-rings/0034.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0035",
+			"path": "resource/textures/teleport-effect-no-rings/0035.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0036",
+			"path": "resource/textures/teleport-effect-no-rings/0036.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0037",
+			"path": "resource/textures/teleport-effect-no-rings/0037.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0038",
+			"path": "resource/textures/teleport-effect-no-rings/0038.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0039",
+			"path": "resource/textures/teleport-effect-no-rings/0039.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0040",
+			"path": "resource/textures/teleport-effect-no-rings/0040.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0041",
+			"path": "resource/textures/teleport-effect-no-rings/0041.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0042",
+			"path": "resource/textures/teleport-effect-no-rings/0042.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0043",
+			"path": "resource/textures/teleport-effect-no-rings/0043.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0044",
+			"path": "resource/textures/teleport-effect-no-rings/0044.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0045",
+			"path": "resource/textures/teleport-effect-no-rings/0045.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0046",
+			"path": "resource/textures/teleport-effect-no-rings/0046.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0047",
+			"path": "resource/textures/teleport-effect-no-rings/0047.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0048",
+			"path": "resource/textures/teleport-effect-no-rings/0048.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0049",
+			"path": "resource/textures/teleport-effect-no-rings/0049.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0050",
+			"path": "resource/textures/teleport-effect-no-rings/0050.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0051",
+			"path": "resource/textures/teleport-effect-no-rings/0051.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0052",
+			"path": "resource/textures/teleport-effect-no-rings/0052.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0053",
+			"path": "resource/textures/teleport-effect-no-rings/0053.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0054",
+			"path": "resource/textures/teleport-effect-no-rings/0054.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0055",
+			"path": "resource/textures/teleport-effect-no-rings/0055.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0056",
+			"path": "resource/textures/teleport-effect-no-rings/0056.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0057",
+			"path": "resource/textures/teleport-effect-no-rings/0057.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0058",
+			"path": "resource/textures/teleport-effect-no-rings/0058.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0059",
+			"path": "resource/textures/teleport-effect-no-rings/0059.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0060",
+			"path": "resource/textures/teleport-effect-no-rings/0060.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0061",
+			"path": "resource/textures/teleport-effect-no-rings/0061.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0062",
+			"path": "resource/textures/teleport-effect-no-rings/0062.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0063",
+			"path": "resource/textures/teleport-effect-no-rings/0063.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0064",
+			"path": "resource/textures/teleport-effect-no-rings/0064.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0065",
+			"path": "resource/textures/teleport-effect-no-rings/0065.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0066",
+			"path": "resource/textures/teleport-effect-no-rings/0066.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0067",
+			"path": "resource/textures/teleport-effect-no-rings/0067.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0068",
+			"path": "resource/textures/teleport-effect-no-rings/0068.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0069",
+			"path": "resource/textures/teleport-effect-no-rings/0069.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0070",
+			"path": "resource/textures/teleport-effect-no-rings/0070.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0071",
+			"path": "resource/textures/teleport-effect-no-rings/0071.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0072",
+			"path": "resource/textures/teleport-effect-no-rings/0072.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0073",
+			"path": "resource/textures/teleport-effect-no-rings/0073.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0074",
+			"path": "resource/textures/teleport-effect-no-rings/0074.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0075",
+			"path": "resource/textures/teleport-effect-no-rings/0075.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0076",
+			"path": "resource/textures/teleport-effect-no-rings/0076.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0077",
+			"path": "resource/textures/teleport-effect-no-rings/0077.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0078",
+			"path": "resource/textures/teleport-effect-no-rings/0078.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0079",
+			"path": "resource/textures/teleport-effect-no-rings/0079.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0080",
+			"path": "resource/textures/teleport-effect-no-rings/0080.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0081",
+			"path": "resource/textures/teleport-effect-no-rings/0081.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0082",
+			"path": "resource/textures/teleport-effect-no-rings/0082.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0083",
+			"path": "resource/textures/teleport-effect-no-rings/0083.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0084",
+			"path": "resource/textures/teleport-effect-no-rings/0084.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0085",
+			"path": "resource/textures/teleport-effect-no-rings/0085.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0086",
+			"path": "resource/textures/teleport-effect-no-rings/0086.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0087",
+			"path": "resource/textures/teleport-effect-no-rings/0087.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0088",
+			"path": "resource/textures/teleport-effect-no-rings/0088.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0089",
+			"path": "resource/textures/teleport-effect-no-rings/0089.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0090",
+			"path": "resource/textures/teleport-effect-no-rings/0090.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0091",
+			"path": "resource/textures/teleport-effect-no-rings/0091.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0092",
+			"path": "resource/textures/teleport-effect-no-rings/0092.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0093",
+			"path": "resource/textures/teleport-effect-no-rings/0093.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0094",
+			"path": "resource/textures/teleport-effect-no-rings/0094.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0095",
+			"path": "resource/textures/teleport-effect-no-rings/0095.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0096",
+			"path": "resource/textures/teleport-effect-no-rings/0096.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0097",
+			"path": "resource/textures/teleport-effect-no-rings/0097.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0098",
+			"path": "resource/textures/teleport-effect-no-rings/0098.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0099",
+			"path": "resource/textures/teleport-effect-no-rings/0099.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		},
+		{
+			"assetName": "teleport_anim_0100",
+			"path": "resource/textures/teleport-effect-no-rings/0100.png",
+			"secondaryPath": "",
+			"rgbColor": {
+				"a": 255,
+				"r": 255,
+				"g": 255,
+				"b": 255
+			},
+			"desc": 2,
+			"emoji": {
+				"codePoints": ""
+			},
+			"icon": {
+				"type": 0,
+				"code": 0
+			},
+			"iconSize": 0
+		}
+	]
+}

@@ -28,6 +28,9 @@ namespace bnscup
 
 		void setMirror(bool isMirror);
 
+		bool isEnable() const;
+		void setEnable(bool isEnable);
+
 	private:
 
 		double m_moveTimer;
@@ -39,6 +42,7 @@ namespace bnscup
 		Vec2 m_targetPos;
 		Vec2 m_prevPos;
 		bool m_isMirror;
+		bool m_isEnable;
 	};
 }
 
