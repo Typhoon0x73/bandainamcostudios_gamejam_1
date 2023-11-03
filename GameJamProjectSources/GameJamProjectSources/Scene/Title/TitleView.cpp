@@ -51,7 +51,7 @@ namespace bnscup
 		{
 			const auto& selectText = m_buttonFont(U"ステージ選択");
 			const auto& buttonRect = m_pToStageSelectButton->getRect();
-			selectText.drawAt(buttonRect.center());
+			selectText.draw(buttonRect.x, buttonRect.y + (buttonRect.h - selectText.region().h) * 0.5);
 			if (buttonRect.mouseOver())
 			{
 				buttonRect.drawFrame();
@@ -63,7 +63,7 @@ namespace bnscup
 		{
 			const auto& selectText = m_buttonFont(U"ゲーム終了");
 			const auto& buttonRect = m_pExitButton->getRect();
-			selectText.drawAt(buttonRect.center());
+			selectText.draw(buttonRect.x, buttonRect.y + (buttonRect.h - selectText.region().h) * 0.5);
 			if (buttonRect.mouseOver())
 			{
 				buttonRect.drawFrame();
