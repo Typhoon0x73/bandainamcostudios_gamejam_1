@@ -7,11 +7,14 @@ namespace bnscup
 		, m_index{ 0 }
 		, m_textures{}
 		, m_isEnable{ false }
+		, m_se{}
 	{
 		for (int32 i : step(100))
 		{
 			m_textures.emplace_back(TextureAsset(U"teleport_anim_{:0>4}"_fmt(i + 1)));
 		}
+		m_se = AudioAsset(U"sd_teleport");
+		m_se.setVolume(0.6f);
 	}
 
 	TeleportAnim::~TeleportAnim()
@@ -60,6 +63,10 @@ namespace bnscup
 	void TeleportAnim::setEnable(bool isEnable)
 	{
 		m_isEnable = isEnable;
+		if (m_isEnable)
+		{
+			m_se.playOneShot();
+		}
 	}
 
 	bool TeleportAnim::isEnd() const

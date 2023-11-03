@@ -1,5 +1,18 @@
 {
 	"packName": "teleport_anim",
+	"audioAssetDatas": [
+		{
+			"assetName": "sd_teleport",
+			"path": "resource/sounds/se/game/Retro Charge 13.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		}
+	],
 	"textureAssetDatas": [
 		{
 			"assetName": "teleport_anim_0001",

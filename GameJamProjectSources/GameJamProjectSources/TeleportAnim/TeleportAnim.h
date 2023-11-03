@@ -30,6 +30,7 @@ namespace bnscup
 		int32 m_index;
 		Array<Texture> m_textures;
 		Vec2 m_pos;
+		Audio m_se;
 	};
 }
 
