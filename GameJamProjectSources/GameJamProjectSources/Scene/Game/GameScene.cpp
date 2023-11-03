@@ -399,16 +399,30 @@ namespace bnscup
 			// マップの生成
 			auto* pMapData = new MapData(
 				{
-					RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightLeft)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::DownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Down)      , FromEnum(RoomData::Route::None) },
-					RoomData{ FromEnum(RoomData::Route::RightDown)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::All)          , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Left)         , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
-					RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Right)        , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft) , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDown)    , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::Left) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightLeft)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::DownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Down)      , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::RightDown)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::All)          , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::DownLeft)     , FromEnum(RoomData::Route::Down) }, RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRight)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft) , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDown)    , FromEnum(RoomData::Route::None) },
 					RoomData{ FromEnum(RoomData::Route::UpDown)     , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightDown)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::All)          , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
-					RoomData{ FromEnum(RoomData::Route::UpRight)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)       , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)    , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRight)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)       , FromEnum(RoomData::Route::Left) }, RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)    , FromEnum(RoomData::Route::None) },
 				},
 				U"dungeon_tileset",
 				roomCountX, roomCountY, chipSize
 				);
 			m_pMapData.reset(pMapData);
+
+			// アイテムの生成
+			const Point KeyPositions[] = {
+				{ 0, 1 },
+				{ 0, 4 },
+			};
+			for (const auto& keyPos : KeyPositions)
+			{
+				auto* pItem = new Item(Item::Type::GoldKey);
+				pItem->setPos(MapPosToGlobalPos(keyPos));
+				pItem->setSrcRect(RectF{ 9 * chipSize, 9 * chipSize, chipSize, chipSize });
+				pItem->setTexture(U"dungeon_tileset");
+				m_items.emplace_back(pItem);
+			}
 
 			// 敵の生成
 			{
@@ -444,8 +458,26 @@ namespace bnscup
 				m_enemies.emplace_back(pEnemy);
 				m_units.emplace_back(pEnemy);
 			}
+			{
+				auto* pEnemy = new Enemy();
+				pEnemy->setPos(MapPosToGlobalPos(Point{ 5, 3 }));
+				pEnemy->setMoveType(Enemy::MoveType::LeftRight);
+				pEnemy->setMoveDirection(RoomData::Route::Left);
+				pEnemy->setMirror(true);
+				pEnemy->setTexture(U"dungeon_tileset_2");
+				pEnemy->setAnimRect(
+					{
+						{ 0.15s, RectF{ 368, 248, 16, 24 } },
+						{ 0.15s, RectF{ 384, 248, 16, 24 } },
+						{ 0.15s, RectF{ 400, 248, 16, 24 } },
+						{ 0.15s, RectF{ 416, 248, 16, 24 } },
+					}
+				);
+				m_enemies.emplace_back(pEnemy);
+				m_units.emplace_back(pEnemy);
+			}
 
-			const Point startRoom{ 2, 3 };
+			const Point startRoom{ 2, 2 };
 
 			// プレイヤーの生成
 			{
@@ -1135,11 +1167,13 @@ namespace bnscup
 		}
 		Point enemyPos = MapPosFromGlobalPos(pEnemy->getPos());
 		const auto& roomData = m_pMapData->getRoomData(enemyPos);
-		if (not(roomData.canPassable(pEnemy->getMoveDirection())))
+		const auto& moveDirection = pEnemy->getMoveDirection();
+		if (not(roomData.canPassable(moveDirection))
+			|| roomData.isLocked(moveDirection))
 		{
 			if (pEnemy->getMoveType() == Enemy::MoveType::UpDown)
 			{
-				if (pEnemy->getMoveDirection() == RoomData::Route::Up)
+				if (moveDirection == RoomData::Route::Up)
 				{
 					pEnemy->setMoveDirection(RoomData::Route::Down);
 				}
@@ -1150,7 +1184,7 @@ namespace bnscup
 			}
 			else if (pEnemy->getMoveType() == Enemy::MoveType::LeftRight)
 			{
-				if (pEnemy->getMoveDirection() == RoomData::Route::Left)
+				if (moveDirection == RoomData::Route::Left)
 				{
 					pEnemy->setMoveDirection(RoomData::Route::Right);
 					pEnemy->setMirror(false);
@@ -1162,6 +1196,7 @@ namespace bnscup
 				}
 			}
 			DEBUG_BREAK(not(roomData.canPassable(pEnemy->getMoveDirection())));
+			DEBUG_BREAK(roomData.isLocked(pEnemy->getMoveDirection()));
 		}
 	}
 	
