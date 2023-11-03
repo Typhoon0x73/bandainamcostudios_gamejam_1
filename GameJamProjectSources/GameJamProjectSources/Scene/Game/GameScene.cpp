@@ -282,6 +282,7 @@ namespace bnscup
 				auto* pPlayerUnit = new Unit();
 				pPlayerUnit->setPos(MapPosToGlobalPos(startRoom));
 				pPlayerUnit->setTexture(U"dungeon_tileset_2");
+				pPlayerUnit->setFootStepSE(U"sd_foot_step");
 				pPlayerUnit->setAnimRect(
 					{
 						{ 0.2s, RectF{ 128, 64, 16, 32 } },
@@ -348,6 +349,7 @@ namespace bnscup
 				auto* pPlayerUnit = new Unit();
 				pPlayerUnit->setPos(MapPosToGlobalPos(startRoom));
 				pPlayerUnit->setTexture(U"dungeon_tileset_2");
+				pPlayerUnit->setFootStepSE(U"sd_foot_step");
 				pPlayerUnit->setAnimRect(
 					{
 						{ 0.2s, RectF{ 128, 64, 16, 32 } },

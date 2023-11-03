@@ -14,7 +14,6 @@ namespace bnscup
 			m_textures.emplace_back(TextureAsset(U"teleport_anim_{:0>4}"_fmt(i + 1)));
 		}
 		m_se = AudioAsset(U"sd_teleport");
-		m_se.setVolume(0.1);
 	}
 
 	TeleportAnim::~TeleportAnim()
@@ -65,7 +64,8 @@ namespace bnscup
 		m_isEnable = isEnable;
 		if (m_isEnable)
 		{
-			m_se.playOneShot();
+			m_se.setVolume(0.3);
+			m_se.play();
 		}
 	}
 

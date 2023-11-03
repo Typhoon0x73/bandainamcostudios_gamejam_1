@@ -5,6 +5,7 @@ namespace bnscup
 	Unit::Unit()
 		: m_moveTimer{ 0.0 }
 		, m_animTimer{ 0.0 }
+		, m_footStepSoundTimer{ 0.0 }
 		, m_animRectNo{ 0 }
 		, m_texture{}
 		, m_animRects{}
@@ -13,6 +14,7 @@ namespace bnscup
 		, m_prevPos{}
 		, m_isMirror{ false }
 		, m_isEnable{ true }
+		, m_footStepSE{}
 	{
 	}
 
@@ -23,18 +25,27 @@ namespace bnscup
 	void Unit::update()
 	{
 		m_animTimer += Scene::DeltaTime();
-		if (m_animRects[m_animRectNo].first.count() <= m_animTimer) {
+		if (m_animRects[m_animRectNo].first.count() <= m_animTimer)
+		{
 			m_animRectNo++;
 			m_animTimer = 0.0;
-			if (m_animRectNo >= m_animRects.size()) {
+			if (m_animRectNo >= m_animRects.size())
+			{
 				m_animRectNo = 0;
 			}
 		}
 
-		if (m_targetPos != m_pos) {
+		if (m_targetPos != m_pos)
+		{
 			m_moveTimer += Scene::DeltaTime();
+			m_footStepSoundTimer += Scene::DeltaTime();
 			m_pos = Math::Lerp(m_prevPos, m_targetPos, m_moveTimer);
-			if (m_moveTimer >= 1.0) {
+			if (m_footStepSoundTimer > 0.3)
+			{
+				playFootStepSE();
+			}
+			if (m_moveTimer >= 1.0)
+			{
 				m_pos = m_targetPos;
 				m_moveTimer = 0.0;
 			}
@@ -52,6 +63,10 @@ namespace bnscup
 		m_targetPos = targetPos;
 		m_prevPos = m_pos;
 		m_moveTimer = 0.0;
+		if (m_targetPos != m_pos)
+		{
+			playFootStepSE();
+		}
 	}
 
 	void Unit::setPos(const Vec2& pos)
@@ -75,6 +90,11 @@ namespace bnscup
 		m_animRects = animRects;
 	}
 
+	void Unit::setFootStepSE(AssetNameView assetName)
+	{
+		m_footStepSE = AudioAsset(assetName);
+	}
+
 	bool Unit::isMoving() const
 	{
 		return (m_targetPos != m_pos);
@@ -93,6 +113,17 @@ namespace bnscup
 	void Unit::setEnable(bool isEnable)
 	{
 		m_isEnable = isEnable;
+	}
+
+	void Unit::playFootStepSE()
+	{
+		if (m_footStepSE.isEmpty() or m_footStepSE.isPlaying())
+		{
+			return;
+		}
+		m_footStepSoundTimer = 0.0;
+		m_footStepSE.setVolume(0.1);
+		m_footStepSE.play();
 	}
 
 }

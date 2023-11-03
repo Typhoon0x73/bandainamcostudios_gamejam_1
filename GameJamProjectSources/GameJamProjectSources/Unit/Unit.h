@@ -23,6 +23,7 @@ namespace bnscup
 
 		void setTexture(AssetNameView assetName);
 		void setAnimRect(const Array<std::pair<Duration, RectF>>& animRects);
+		void setFootStepSE(AssetNameView assetName);
 
 		bool isMoving() const;
 
@@ -33,8 +34,13 @@ namespace bnscup
 
 	private:
 
+		void playFootStepSE();
+
+	private:
+
 		double m_moveTimer;
 		double m_animTimer;
+		double m_footStepSoundTimer;
 		uint32 m_animRectNo;
 		Texture m_texture;
 		Array<std::pair<Duration, RectF>> m_animRects;
@@ -43,6 +49,7 @@ namespace bnscup
 		Vec2 m_prevPos;
 		bool m_isMirror;
 		bool m_isEnable;
+		Audio m_footStepSE;
 	};
 }
 
