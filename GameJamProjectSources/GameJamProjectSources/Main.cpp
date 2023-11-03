@@ -30,6 +30,15 @@ namespace
 
 void Main()
 {
+	// LICENSEの設定
+	{
+		LicenseInfo bgmInfo1;
+		bgmInfo1.copyright = U"jhaeka";
+		bgmInfo1.title = U"wav-short-loopable-background-music";
+		bgmInfo1.text = U"itch.ioからBGMの利用";
+		LicenseManager::AddLicense(bgmInfo1);
+	}
+
 	// ウィンドウの設定
 	{
 		Window::Resize(bnscup::WINDOW_SIZE_W, bnscup::WINDOW_SIZE_H);

@@ -14,7 +14,7 @@ namespace bnscup
 			m_textures.emplace_back(TextureAsset(U"teleport_anim_{:0>4}"_fmt(i + 1)));
 		}
 		m_se = AudioAsset(U"sd_teleport");
-		m_se.setVolume(0.6f);
+		m_se.setVolume(0.1);
 	}
 
 	TeleportAnim::~TeleportAnim()

@@ -197,6 +197,7 @@ namespace bnscup
 		Font m_buttonFont;
 		Audio m_collectItemSE;
 		Audio m_unlockDoorSE;
+		Audio m_ingameBGM;
 	};
 
 	//==================================================
@@ -233,6 +234,7 @@ namespace bnscup
 		, m_buttonFont{}
 		, m_collectItemSE{}
 		, m_unlockDoorSE{}
+		, m_ingameBGM{}
 	{
 		// ステージ表示用
 		m_stageNoText = U"ステージ{}"_fmt(stageNo + 1);
@@ -409,6 +411,10 @@ namespace bnscup
 		m_buttonFont = FontAsset(U"font_button");
 		m_collectItemSE = AudioAsset(U"sd_collect_item");
 		m_unlockDoorSE = AudioAsset(U"sd_unlock_door");
+		m_ingameBGM = AudioAsset(U"sd_bgm_ingame");
+		m_ingameBGM.setLoop(true);
+		m_ingameBGM.setVolume(0.1);
+		m_ingameBGM.play();
 	}
 
 	GameScene::Impl::~Impl()

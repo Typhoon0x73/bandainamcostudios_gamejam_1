@@ -42,6 +42,17 @@
 			"noteOff": 0.0,
 			"velocity": 0.0,
 			"sampleRate": 44100
+		},
+		{
+			"assetName": "sd_bgm_ingame",
+			"path": "resource/sounds/bgm/Spinning out.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
 		}
 	],
 	"textureAssetDatas": [
