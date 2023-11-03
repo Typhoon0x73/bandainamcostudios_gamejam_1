@@ -64,7 +64,7 @@ namespace bnscup
 			pButton->update();
 			if (pButton->isSelected(Button::Sounds::Select))
 			{
-				m_selectStageNo = i;
+				m_selectStageNo = static_cast<int32>(i);
 			}
 		}
 	}

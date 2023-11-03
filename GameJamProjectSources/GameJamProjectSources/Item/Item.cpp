@@ -21,7 +21,6 @@ namespace bnscup
 	void Item::draw() const
 	{
 		Vec2 pos = m_pos;
-		pos.y + m_srcRect.h * 0.5;
 		m_texture(m_srcRect).drawAt(pos);
 	}
 
