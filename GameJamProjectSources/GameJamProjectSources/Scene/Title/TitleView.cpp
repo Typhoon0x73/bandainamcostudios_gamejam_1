@@ -50,14 +50,24 @@ namespace bnscup
 		if (m_pToStageSelectButton)
 		{
 			const auto& selectText = m_buttonFont(U"ステージ選択");
-			selectText.draw(m_pToStageSelectButton->getRect());
+			const auto& buttonRect = m_pToStageSelectButton->getRect();
+			selectText.drawAt(buttonRect.center());
+			if (buttonRect.mouseOver())
+			{
+				buttonRect.drawFrame();
+			}
 		}
 
 		// ゲーム終了ボタン
 		if (m_pExitButton)
 		{
 			const auto& selectText = m_buttonFont(U"ゲーム終了");
-			selectText.draw(m_pExitButton->getRect());
+			const auto& buttonRect = m_pExitButton->getRect();
+			selectText.drawAt(buttonRect.center());
+			if (buttonRect.mouseOver())
+			{
+				buttonRect.drawFrame();
+			}
 		}
 
 		// ロゴ
