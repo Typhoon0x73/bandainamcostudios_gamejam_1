@@ -240,7 +240,7 @@ namespace bnscup
 		m_stageNoText = U"ステージ{}"_fmt(stageNo + 1);
 
 		// あとでステージ生成クラスとかにまとめたい
-		if (stageNo == 0 or stageNo == 2)
+		if (stageNo == 0)
 		{
 			const int32 chipSize = 16;
 			const int32 roomCountX = 2;
@@ -308,7 +308,6 @@ namespace bnscup
 		}
 		else if (stageNo == 1)
 		{
-
 			const int32 chipSize = 16;
 			const int32 roomCountX = 3;
 			const int32 roomCountY = 3;
@@ -391,6 +390,81 @@ namespace bnscup
 			}
 
 		}
+		else if (stageNo == 2)
+		{
+			const int32 chipSize = 16;
+			const int32 roomCountX = 6;
+			const int32 roomCountY = 5;
+
+			// マップの生成
+			auto* pMapData = new MapData(
+				{
+					RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightLeft)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::DownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Down)      , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::RightDown)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::All)          , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Left)         , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRightDown), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft)   , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Right)        , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft) , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDown)    , FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpDown)     , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightDown)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::All)          , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::RightDownLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft), FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpDownLeft), FromEnum(RoomData::Route::None) },
+					RoomData{ FromEnum(RoomData::Route::UpRight)    , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpRightLeft)  , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)       , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::Right)      , FromEnum(RoomData::Route::None) }, RoomData{ FromEnum(RoomData::Route::UpLeft)    , FromEnum(RoomData::Route::None) },
+				},
+				U"dungeon_tileset",
+				roomCountX, roomCountY, chipSize
+				);
+			m_pMapData.reset(pMapData);
+
+			// 敵の生成
+			{
+				auto* pEnemy = new Enemy();
+				pEnemy->setPos(MapPosToGlobalPos(Point{ 4, 0 }));
+				pEnemy->setMoveType(Enemy::MoveType::UpDown);
+				pEnemy->setTexture(U"dungeon_tileset_2");
+				pEnemy->setAnimRect(
+					{
+						{ 0.15s, RectF{ 368, 272, 16, 24 } },
+						{ 0.15s, RectF{ 384, 272, 16, 24 } },
+						{ 0.15s, RectF{ 400, 272, 16, 24 } },
+						{ 0.15s, RectF{ 416, 272, 16, 24 } },
+					}
+				);
+				m_enemies.emplace_back(pEnemy);
+				m_units.emplace_back(pEnemy);
+			}
+			{
+				auto* pEnemy = new Enemy();
+				pEnemy->setPos(MapPosToGlobalPos(Point{ 1, 0 }));
+				pEnemy->setMoveType(Enemy::MoveType::LeftRight);
+				pEnemy->setMoveDirection(RoomData::Route::Right);
+				pEnemy->setTexture(U"dungeon_tileset_2");
+				pEnemy->setAnimRect(
+					{
+						{ 0.15s, RectF{ 368, 248, 16, 24 } },
+						{ 0.15s, RectF{ 384, 248, 16, 24 } },
+						{ 0.15s, RectF{ 400, 248, 16, 24 } },
+						{ 0.15s, RectF{ 416, 248, 16, 24 } },
+					}
+				);
+				m_enemies.emplace_back(pEnemy);
+				m_units.emplace_back(pEnemy);
+			}
+
+			const Point startRoom{ 2, 3 };
+
+			// プレイヤーの生成
+			{
+				auto* pPlayerUnit = new Unit();
+				pPlayerUnit->setPos(MapPosToGlobalPos(startRoom));
+				pPlayerUnit->setTexture(U"dungeon_tileset_2");
+				pPlayerUnit->setFootStepSE(U"sd_foot_step");
+				pPlayerUnit->setAnimRect(
+					{
+						{ 0.2s, RectF{ 128, 64, 16, 32 } },
+						{ 0.2s, RectF{ 144, 64, 16, 32 } },
+						{ 0.2s, RectF{ 160, 64, 16, 32 } },
+						{ 0.2s, RectF{ 176, 64, 16, 32 } },
+					}
+				);
+				m_pPlayerUnit = pPlayerUnit;
+				m_units.emplace_back(pPlayerUnit);
+			}
+		}
 
 		// カメラの設定
 		{
@@ -415,7 +489,7 @@ namespace bnscup
 		m_unlockDoorSE = AudioAsset(U"sd_unlock_door");
 		m_ingameBGM = AudioAsset(U"sd_bgm_ingame");
 		m_ingameBGM.setLoop(true);
-		m_ingameBGM.setVolume(0.1);
+		m_ingameBGM.setVolume(0.075);
 		m_ingameBGM.play();
 	}
 
@@ -1072,6 +1146,19 @@ namespace bnscup
 				else
 				{
 					pEnemy->setMoveDirection(RoomData::Route::Up);
+				}
+			}
+			else if (pEnemy->getMoveType() == Enemy::MoveType::LeftRight)
+			{
+				if (pEnemy->getMoveDirection() == RoomData::Route::Left)
+				{
+					pEnemy->setMoveDirection(RoomData::Route::Right);
+					pEnemy->setMirror(false);
+				}
+				else
+				{
+					pEnemy->setMoveDirection(RoomData::Route::Left);
+					pEnemy->setMirror(true);
 				}
 			}
 			DEBUG_BREAK(not(roomData.canPassable(pEnemy->getMoveDirection())));
