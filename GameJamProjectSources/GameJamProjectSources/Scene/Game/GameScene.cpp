@@ -169,6 +169,7 @@ namespace bnscup
 
 		Step m_step;
 		Camera2D m_camera;
+		String m_stageNoText;
 		std::unique_ptr<MapData> m_pMapData;
 		std::unique_ptr<MapView> m_pMapView;
 		RenderTexture m_renderTarget;
@@ -204,6 +205,7 @@ namespace bnscup
 		: m_nextScene{ SceneKey::Title }
 		, m_step{ Step::Idle }
 		, m_camera{ Vec2::Zero(), 1.0, Camera2DParameters::NoControl() }
+		, m_stageNoText{ U"" }
 		, m_pMapData{ nullptr }
 		, m_pMapView{ nullptr }
 		, m_renderTarget{
@@ -232,6 +234,9 @@ namespace bnscup
 		, m_collectItemSE{}
 		, m_unlockDoorSE{}
 	{
+		// ステージ表示用
+		m_stageNoText = U"ステージ{}"_fmt(stageNo + 1);
+
 		// あとでステージ生成クラスとかにまとめたい
 		if (stageNo == 0 or stageNo == 2)
 		{
@@ -440,6 +445,7 @@ namespace bnscup
 	void GameScene::Impl::draw() const
 	{
 		ROUNDRECT_STAGENO_AREA.draw(Palette::Darkslategray).drawFrame(2.0, Palette::Darkgray);
+		m_buttonFont(m_stageNoText).drawAt(ROUNDRECT_STAGENO_AREA.center());
 
 		// ポーズボタン
 		{
