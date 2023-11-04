@@ -458,9 +458,11 @@ namespace bnscup
 			}
 
 			// アイテムの生成
-			const Point KeyPositions[] = {
+			const Point KeyPositions[] =
+			{
 				{ 0, 1 },
 				{ 0, 4 },
+				{ 5, 0 },
 			};
 			for (const auto& keyPos : KeyPositions)
 			{
@@ -1160,16 +1162,22 @@ namespace bnscup
 				rescueCount++;
 			}
 		}
+		MessageBox* pMessageBox = nullptr;
 		if (rescueCount != m_targetUnits.size())
 		{
-			exitMessage = U"まだ助けていないユニットがいます。\n";
+			exitMessage =
+				U"まだ助けていないユニットがいます。\n"
+				U"脱出しますか？";
+			pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, exitMessage);
 		}
 		else
 		{
-			exitMessage = U"すべてのユニットを救助しました！\n";
+			exitMessage =
+				U"すべてのユニットを救助しました！\n"
+				U"脱出します。";
+			pMessageBox = new MessageBox(MessageBox::ButtonStyle::OnlyOK, MessageBox::ExistCrossButton::No, exitMessage);
 		}
-		exitMessage += U"脱出しますか？";
-		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, exitMessage);
+		DEBUG_BREAK(pMessageBox == nullptr);
 		m_pMessageBox.reset(pMessageBox);
 		m_step = Step::ReturnPopup;
 	}
