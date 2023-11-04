@@ -1,5 +1,18 @@
 {
 	"packName": "stageselect_top",
+	"audioAssetDatas": [
+		{
+			"assetName": "sd_bgm_stageselect",
+			"path": "resource/sounds/bgm/BEAT this Week.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		}
+	],
 	"fontAssetDatas": [
 		{
 			"assetName": "font_play_button",

@@ -29,6 +29,7 @@ namespace bnscup
 		bool m_isEnd;
 
 		TitleView m_titleView;
+		Audio m_titleBGM;
 	};
 
 	//==================================================
@@ -38,7 +39,12 @@ namespace bnscup
 		, m_nextSceneKey{ SceneKey::Title }
 		, m_isEnd{ false }
 		, m_titleView{}
+		, m_titleBGM{}
 	{
+		m_titleBGM = AudioAsset(U"sd_bgm_title");
+		m_titleBGM.setLoop(true);
+		m_titleBGM.setVolume(0.05);
+		m_titleBGM.play();
 	}
 
 	TitleScene::Impl::~Impl()

@@ -25,6 +25,7 @@ namespace bnscup
 		bool m_isEnd;
 
 		StageSelectView m_stageSelectView;
+		Audio m_stageSelectBGM;
 	};
 
 	//==================================================
@@ -34,7 +35,12 @@ namespace bnscup
 		, m_isEnd{ false }
 		, m_stageSelectView{}
 		, m_stageNo{ -1 }
+		, m_stageSelectBGM{}
 	{
+		m_stageSelectBGM = AudioAsset(U"sd_bgm_stageselect");
+		m_stageSelectBGM.setLoop(true);
+		m_stageSelectBGM.setVolume(0.1);
+		m_stageSelectBGM.play();
 	}
 
 	StageSelectScene::Impl::~Impl()

@@ -1,5 +1,18 @@
 {
 	"packName": "title_top",
+	"audioAssetDatas": [
+		{
+			"assetName": "sd_bgm_title",
+			"path": "resource/sounds/bgm/Catwalk.wav",
+			"streaming": false,
+			"instrument": 0,
+			"key": 0,
+			"noteOn": 0.0,
+			"noteOff": 0.0,
+			"velocity": 0.0,
+			"sampleRate": 44100
+		}
+	],
 	"fontAssetDatas": [
 		{
 			"assetName": "font_title_button",
