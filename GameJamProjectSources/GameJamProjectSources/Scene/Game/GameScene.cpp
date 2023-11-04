@@ -410,6 +410,53 @@ namespace bnscup
 				);
 			m_pMapData.reset(pMapData);
 
+			// 救助対象ユニット
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 0, 0 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 256, 16, 32 } },
+						{ 0.175s, RectF{ 144, 256, 16, 32 } },
+						{ 0.175s, RectF{ 160, 256, 16, 32 } },
+						{ 0.175s, RectF{ 176, 256, 16, 32 } },
+					}
+				);
+				m_targetUnits.emplace_back(Rescued::No, pUnit);
+				m_units.emplace_back(pUnit);
+			}
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 3, 4 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 288, 16, 32 } },
+						{ 0.175s, RectF{ 144, 288, 16, 32 } },
+						{ 0.175s, RectF{ 160, 288, 16, 32 } },
+						{ 0.175s, RectF{ 176, 288, 16, 32 } },
+					}
+				);
+				m_targetUnits.emplace_back(Rescued::No, pUnit);
+				m_units.emplace_back(pUnit);
+			}
+			{
+				auto* pUnit = new Unit();
+				pUnit->setPos(MapPosToGlobalPos(Point{ 3, 2 }));
+				pUnit->setTexture(U"dungeon_tileset_2");
+				pUnit->setAnimRect(
+					{
+						{ 0.175s, RectF{ 128, 32, 16, 32 } },
+						{ 0.175s, RectF{ 144, 32, 16, 32 } },
+						{ 0.175s, RectF{ 160, 32, 16, 32 } },
+						{ 0.175s, RectF{ 176, 32, 16, 32 } },
+					}
+				);
+				m_targetUnits.emplace_back(Rescued::No, pUnit);
+				m_units.emplace_back(pUnit);
+			}
+
 			// アイテムの生成
 			const Point KeyPositions[] = {
 				{ 0, 1 },
