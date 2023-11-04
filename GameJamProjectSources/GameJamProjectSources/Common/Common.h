@@ -8,7 +8,7 @@
 
 #else // _DEBUG
 
-#define DEBUG_BREAK(x) ((void)x)
+#define DEBUG_BREAK(x) ((void)(x))
 
 #endif // _DEBUG
 
