@@ -1146,7 +1146,10 @@ namespace bnscup
 
 	void GameScene::Impl::createRescuePopup()
 	{
-		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::YesNo, MessageBox::ExistCrossButton::No, U"助けますか？");
+		String message =
+			U"救助対象を見つけました！\n"
+			U"転送します。";
+		auto* pMessageBox = new MessageBox(MessageBox::ButtonStyle::OnlyOK, MessageBox::ExistCrossButton::No, message);
 		m_pMessageBox.reset(pMessageBox);
 		m_step = Step::RescuePopup;
 	}
